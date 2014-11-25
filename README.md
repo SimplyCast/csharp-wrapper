@@ -18,6 +18,9 @@ Visual Studio (C#)".</p>
 <p>Examples of how to use the API wrapper are included in the file Examples.cs;
 there are a series of methods in the SimplyCast.Examples class that run 
 through different categories of functionality.</p>
+
+<p>By default, the API Wrapper places requests to http://api.simplycast.com/.
+This can be configured by calling setURL() on the SimplyCast API object.</p>
 	
 <p>Here is an example of initializing the API wrapper and calling examples or
 API methods:</p>
@@ -27,6 +30,9 @@ string publicKey = "<public>";
 string secretKey = "<secret>";
 
 SimplyCastAPI api = new SimplyCastAPI(publicKey, secretKey);
+
+//If you need to change the API URL, you can use the below code.
+api.setURL("https://app.simplycast.ca/api");
 
 SimplyCast.Examples examples = new SimplyCast.Examples(api);
 e.ContactManagementExample();
