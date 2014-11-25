@@ -78,5 +78,10 @@ namespace SimplyCast
             this.contactManager = new ContactManagerAPI(connection);
             this.simplycast360 = new SimplyCast360API(connection);
         }
+
+        public void setURL(string url)
+        {
+            this.connection.URL = url;
+        }
     }
 }

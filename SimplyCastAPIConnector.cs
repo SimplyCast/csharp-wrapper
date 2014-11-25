@@ -39,6 +39,12 @@ namespace SimplyCast
         private string apiURL = "https://api.simplycast.com/";
         #endregion
 
+        public string URL
+        {
+            get { return this.apiURL; }
+            set { this.apiURL = value; }
+        }
+
         /// <summary>
         /// API constructor
         /// </summary>
