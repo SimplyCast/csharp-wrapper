@@ -36,7 +36,7 @@ namespace SimplyCast
         /// <summary>
         /// API URL, sans the resource endpoint.
         /// </summary>
-        private string apiURL = "https://dev3.simplycast.com/~callain/api/api";//"https://api.simplycast.com/";
+        private string apiURL = "https://api.simplycast.com/";
         #endregion
 
         /// <summary>
