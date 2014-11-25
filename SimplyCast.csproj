@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1BB8F952-52CE-4163-A477-C6BF246CFF22}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimplyCast</RootNamespace>
+    <AssemblyName>SimplyCast</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Documentation.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Documentation.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Examples.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="SimplyCast360\Responses\ContactCollection.cs" />
+    <Compile Include="SimplyCast360\Requests\ContactEntity.cs" />
+    <Compile Include="SimplyCast360\Requests\ListEntity.cs" />
+    <Compile Include="SimplyCast360\Responses\ConnectionEntity.cs" />
+    <Compile Include="SimplyCast360\Responses\ContactEntity.cs" />
+    <Compile Include="SimplyCast360\Responses\ProjectEntity.cs" />
+    <Compile Include="APIException.cs" />
+    <Compile Include="Common\Responses\Error.cs" />
+    <Compile Include="ContactManager\Requests\ColumnEntity.cs" />
+    <Compile Include="ContactManager\Requests\ContactIDCollection.cs" />
+    <Compile Include="ContactManager\Requests\MetadataColumnEntity.cs" />
+    <Compile Include="ContactManager\Requests\MetadataFieldEntity.cs" />
+    <Compile Include="ContactManager\Requests\SuppressionEntries.cs" />
+    <Compile Include="ContactManager\Responses\SuppressionCollection.cs" />
+    <Compile Include="ContactManager\Responses\SuppressionEntry.cs" />
+    <Compile Include="ContactManager\Responses\MetadataFieldCollection.cs" />
+    <Compile Include="ContactManager\Responses\MetadataFieldEntity.cs" />
+    <Compile Include="ResourceAPI.cs" />
+    <Compile Include="Common\Responses\GenericCollection.cs" />
+    <Compile Include="Common\Responses\RelationLink.cs" />
+    <Compile Include="ContactManager\ContactManager.cs" />
+    <Compile Include="ContactManager\Requests\ContactEntity.cs" />
+    <Compile Include="ContactManager\Requests\FieldEntity.cs" />
+    <Compile Include="ContactManager\Requests\ListEntity.cs" />
+    <Compile Include="ContactManager\Responses\ColumnCollection.cs" />
+    <Compile Include="ContactManager\Responses\ColumnEntity.cs" />
+    <Compile Include="ContactManager\Responses\ContactCollection.cs" />
+    <Compile Include="ContactManager\Responses\ContactEntity.cs" />
+    <Compile Include="ContactManager\Responses\FieldCollection.cs" />
+    <Compile Include="ContactManager\Responses\FieldEntity.cs" />
+    <Compile Include="ContactManager\Responses\ListCollection.cs" />
+    <Compile Include="ContactManager\Responses\ListEntity.cs" />
+    <Compile Include="ContactManager\Responses\MetadataColumnCollection.cs" />
+    <Compile Include="ContactManager\Responses\MetadataColumnEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimplyCast360\SimplyCast360.cs" />
+    <Compile Include="SimplyCastAPI.cs" />
+    <Compile Include="SimplyCastAPIConnector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+    <Content Include="README.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
