@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Examples.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="SimplyCast360\Responses\ContactCollection.cs" />
     <Compile Include="SimplyCast360\Requests\ContactEntity.cs" />
     <Compile Include="SimplyCast360\Requests\ListEntity.cs" />
