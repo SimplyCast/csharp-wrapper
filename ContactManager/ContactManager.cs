@@ -402,7 +402,7 @@ namespace SimplyCast.ContactManager
             }
 
             queryParams.Add("ignoreEmptyFields", ignoreEmptyFields ? "1" : "0");
-            queryParams.Add("getExtendedFields", getExtendedFields ? "1" : "0");
+            queryParams.Add("extended", getExtendedFields ? "1" : "0");
 
             return this.connection.Call<Responses.ContactCollection>("GET", "contactmanager/contacts", queryParams, null);
         }
