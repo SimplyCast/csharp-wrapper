@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactManager\Requests\ContactBatchCollection.cs" />
+    <Compile Include="ContactManager\Responses\ContactBatchResponse.cs" />
+    <Compile Include="ContactManager\Responses\ContactBatchResult.cs" />
+    <Compile Include="ContactManager\Responses\ContactBatchResultCollection.cs" />
     <Compile Include="Examples.cs" />
     <Compile Include="SimplyCast360\Responses\ContactCollection.cs" />
     <Compile Include="SimplyCast360\Requests\ContactEntity.cs" />

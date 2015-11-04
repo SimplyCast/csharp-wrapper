@@ -23,6 +23,25 @@ namespace SimplyCast.ContactManager.Requests
         private string id;
         private string value;
 
+        #region Constructors
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public FieldEntity() { }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="id">The field ID.</param>
+        /// <param name="value">The field value.</param>
+        public FieldEntity(string id, string value) {
+            this.id = id;
+            this.value = value;
+        }
+
+        #endregion
+
         /// <summary>
         /// The column identifier of the field to set.
         /// </summary>

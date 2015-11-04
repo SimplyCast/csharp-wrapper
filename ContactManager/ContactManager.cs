@@ -614,6 +614,48 @@ namespace SimplyCast.ContactManager
         }
         #endregion
 
+        /// <summary>
+        /// This function will create a collection of contacts. It will require
+        /// you to construct the contact entity objects by hand and supply them
+        /// as an array.
+        /// 
+        /// This method will defer the processing of the upload. An identifier
+        /// will be returned that can be used to query the status of the batch.
+        /// </summary>
+        /// <param name="contacts">An array of ContactEntity objects.</param>
+        /// <returns>The response will contain a unique identifier that you
+        /// can track the batch status of the job with.</returns>
+        public Responses.ContactBatchResponse BatchCreateContacts(Requests.ContactEntity[] contacts)
+        {
+            Requests.ContactBatchCollection batch = new Requests.ContactBatchCollection();
+            batch.Contacts = contacts;
+            return this.connection.Call<Responses.ContactBatchResponse>("POST", "contactmanager/contacts/batch", null, batch);
+        }
+
+        /// <summary>
+        /// Get information about the given contact batch operation.
+        /// </summary>
+        /// <param name="batchID">The ID of the batch operation to get 
+        /// information for.</param>
+        /// <returns>A batch response containing the status of the job.</returns>
+        public Responses.ContactBatchResponse GetBatchStatus(int batchID)
+        {
+            return this.connection.Call<Responses.ContactBatchResponse>("GET", "contactmanager/contacts/batch/" + batchID.ToString(), null, null);
+        }
+
+        /// <summary>
+        /// Get the results of a contact batch operation (including the 
+        /// representations of the created contacts).
+        /// </summary>
+        /// <param name="batchID">The ID of the batch operation to get a 
+        /// result for.</param>
+        /// <returns>A ContactBatchResult object containing the batch
+        /// result.</returns>
+        public Responses.ContactBatchResultCollection GetBatchResult(int batchID)
+        {
+            return this.connection.Call<Responses.ContactBatchResultCollection>("GET", "contactmanager/contacts/batch/" + batchID.ToString() + "/result", null, null);
+        }
+
         #endregion
 
         #region Metadata Resources 

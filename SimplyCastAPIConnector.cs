@@ -193,7 +193,7 @@ namespace SimplyCast
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             using (TextReader reader = new StringReader(xml))
             {
-                obj = (T)serializer.Deserialize(reader);
+                 obj = (T)serializer.Deserialize(reader);
             }
 
             return obj;

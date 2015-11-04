@@ -106,7 +106,7 @@ namespace SimplyCast
             {
                 list = api.ContactManager.CreateList("test list");
             }
-            catch (APIException e)
+            catch (APIException)
             {
                 list = api.ContactManager.GetListsByName("test list").Lists[0];
             }
@@ -202,6 +202,55 @@ namespace SimplyCast
 
             Console.Write("Press enter to continue...");
             Console.Read();
+        }
+
+        /// <summary>
+        /// Example of creating multiple contacts via batch.
+        /// </summary>
+        public void ContactBatchExample()
+        {
+            List<ContactManager.Requests.ContactEntity> contacts = new List<ContactManager.Requests.ContactEntity>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                ContactManager.Requests.ContactEntity c = new ContactManager.Requests.ContactEntity();
+                c.Fields = new ContactManager.Requests.FieldEntity[] {
+                    new ContactManager.Requests.FieldEntity("23", "test+" + i + "@example.com"),
+                    new ContactManager.Requests.FieldEntity("1", "Jane Doe")                                                  
+                };
+
+                contacts.Add(c);
+            }
+
+            Console.WriteLine("Submitting " + contacts.Count.ToString() + " contacts to a batch create.");
+
+            ContactManager.Responses.ContactBatchResponse response = api.ContactManager.BatchCreateContacts(contacts.ToArray());
+
+            Console.WriteLine("Submitted batch job. ID is " + response.ID.ToString() + ".");
+      
+            // Wait for the batch to complete.
+            do
+            {
+                response = api.ContactManager.GetBatchStatus(response.ID);
+
+                Console.WriteLine("[" + System.DateTime.Now.ToLongTimeString() + "] Current status is: " + response.Status.ToString());
+
+                System.Threading.Thread.Sleep(5000);
+
+            } while (response.Status != ContactManager.Responses.ContactBatchResponse.BatchStatus.Complete && 
+                response.Status != ContactManager.Responses.ContactBatchResponse.BatchStatus.Error);
+
+            ContactManager.Responses.ContactBatchResultCollection results = api.ContactManager.GetBatchResult(response.ID);
+            foreach (ContactManager.Responses.ContactBatchResult result in results.Results)
+            {
+                Console.WriteLine("Created contact " + result.Contact.ID + " (email address is: " + result.Contact.GetFieldsByName("email")[0].Value + ").");
+                Console.WriteLine("Cleaning up: removing contact " + result.Contact.ID + ".");
+
+                api.ContactManager.DeleteContact(result.Contact.ID);
+            }
+
+            Console.Write("Press enter to continue...");
+            Console.ReadLine();
         }
 
         /// <summary>
