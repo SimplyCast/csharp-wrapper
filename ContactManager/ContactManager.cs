@@ -633,6 +633,25 @@ namespace SimplyCast.ContactManager
         }
 
         /// <summary>
+        /// This method upserts a collection of contacts by providing a column
+        /// ID to merge upon. If the provided contact matches an existing one
+        /// on the provided column, the contact will be updated. Otherwise, it
+        /// will be created.
+        /// </summary>
+        /// <param name="contacts">An array of ContactEntity objects.</param>
+        /// <param name="mergeColumnID"></param>
+        /// <returns>The response will contain a unique identifier that you
+        /// can track the batch status of the job with.</returns>
+        public Responses.ContactBatchResponse BatchCreateContacts(Requests.ContactEntity[] contacts, string mergeColumnID)
+        {
+            Dictionary<string, string> queryParameters = new Dictionary<string, string>();
+            queryParameters.Add("mergecolumn", mergeColumnID);
+            Requests.ContactBatchCollection batch = new Requests.ContactBatchCollection();
+            batch.Contacts = contacts;
+            return this.connection.Call<Responses.ContactBatchResponse>("POST", "contactmanager/contacts/batch", queryParameters, batch);
+        }
+
+        /// <summary>
         /// Get information about the given contact batch operation.
         /// </summary>
         /// <param name="batchID">The ID of the batch operation to get 

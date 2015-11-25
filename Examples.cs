@@ -205,18 +205,42 @@ namespace SimplyCast
         }
 
         /// <summary>
-        /// Example of creating multiple contacts via batch.
+        /// Example of creating multiple contacts via batch. Also provides an 
+        /// example of updating existing contacts by merging upon an existing
+        /// column (this will create a new contact if there are no merge
+        /// candidates).
+        /// 
+        /// Note that this is functionality is not backwards-compatible with
+        /// version 1.1. Because merging upon a column could return one or
+        /// more contact responses (if multiple merge candidates are found), 
+        /// ContactBatchResult now contains a ContactCollection object instead
+        /// of a ContactEntity object. The example is updated to show the new
+        /// usage.
         /// </summary>
         public void ContactBatchExample()
         {
+            //Get the email and name column IDs. You should probably do validation on the response ;)
+            string emailColumnID = api.ContactManager.GetColumnsByName("email").Columns[0].ID;
+            string nameColumnID = api.ContactManager.GetColumnsByName("name").Columns[0].ID;
+
+            //Precreate a contact to test the 'upsert' merge functionality.
+            Dictionary<string, string> fields = new Dictionary<string, string>();
+            
+            fields.Add(emailColumnID, "example+2@example.com");
+            fields.Add(nameColumnID, "This name should be overwritten");
+
+            ContactManager.Responses.ContactEntity contact = api.ContactManager.CreateContact(fields);
+
+            Console.WriteLine("Created inital contact (ID: " + contact.ID + ") with name '" + contact.GetFieldsByName("name")[0].Value + "'.");
+
             List<ContactManager.Requests.ContactEntity> contacts = new List<ContactManager.Requests.ContactEntity>();
 
             for (int i = 0; i < 3; i++)
             {
                 ContactManager.Requests.ContactEntity c = new ContactManager.Requests.ContactEntity();
                 c.Fields = new ContactManager.Requests.FieldEntity[] {
-                    new ContactManager.Requests.FieldEntity("23", "test+" + i + "@example.com"),
-                    new ContactManager.Requests.FieldEntity("1", "Jane Doe")                                                  
+                    new ContactManager.Requests.FieldEntity(emailColumnID, "example+" + i + "@example.com"),
+                    new ContactManager.Requests.FieldEntity(nameColumnID, "Jane Doe") 
                 };
 
                 contacts.Add(c);
@@ -224,7 +248,8 @@ namespace SimplyCast
 
             Console.WriteLine("Submitting " + contacts.Count.ToString() + " contacts to a batch create.");
 
-            ContactManager.Responses.ContactBatchResponse response = api.ContactManager.BatchCreateContacts(contacts.ToArray());
+            //Supply the email column as the merge row.
+            ContactManager.Responses.ContactBatchResponse response = api.ContactManager.BatchCreateContacts(contacts.ToArray(), emailColumnID);
 
             Console.WriteLine("Submitted batch job. ID is " + response.ID.ToString() + ".");
       
@@ -243,10 +268,15 @@ namespace SimplyCast
             ContactManager.Responses.ContactBatchResultCollection results = api.ContactManager.GetBatchResult(response.ID);
             foreach (ContactManager.Responses.ContactBatchResult result in results.Results)
             {
-                Console.WriteLine("Created contact " + result.Contact.ID + " (email address is: " + result.Contact.GetFieldsByName("email")[0].Value + ").");
-                Console.WriteLine("Cleaning up: removing contact " + result.Contact.ID + ".");
-
-                api.ContactManager.DeleteContact(result.Contact.ID);
+                //Output information about the created contacts, showing that we did indeed merge the 
+                //new contact information in. We're assuming that there is only one contact returned
+                //as a result of each contact batch operation in the request, but there could be more.
+                Console.WriteLine("Created / updated contact " + result.ContactCollection.Contacts[0].ID + " (" + 
+                    result.ContactCollection.Contacts[0].GetFieldsByName("email")[0].Value + " / " + 
+                    result.ContactCollection.Contacts[0].GetFieldsByName("name")[0].Value + ").");
+                
+                Console.WriteLine("Cleaning up: removing contact " + result.ContactCollection.Contacts[0].ID + ".");
+                api.ContactManager.DeleteContact(result.ContactCollection.Contacts[0].ID);
             }
 
             Console.Write("Press enter to continue...");

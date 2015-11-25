@@ -22,7 +22,7 @@ namespace SimplyCast.ContactManager.Responses
     {
         private int httpResponseCode;
         private string rawContact;
-        private ContactEntity contact;
+        private ContactCollection contacts;
 
         /// <summary>
         /// HTTP response code of the individual request.
@@ -43,26 +43,47 @@ namespace SimplyCast.ContactManager.Responses
             get { return this.rawContact; }
             set { 
                 this.rawContact = value;
-                this.contact = ContactBatchResult.decodeContact(value);
+                Object result = ContactBatchResult.decodeContact(value);
+                if (result is ContactCollection)
+                {
+                    this.contacts = (ContactCollection)result;
+                }
+                else
+                {
+                    ContactCollection c = new ContactCollection();
+                    c.Contacts = new ContactEntity[] {
+                        (ContactEntity) result
+                    };
+                    this.contacts = c;
+                }
+
             }
         }
 
         /// <summary>
         /// Accessor for the contact entity returned as part of the request.
         /// </summary>
-        public ContactEntity Contact
+        public ContactCollection ContactCollection
         {
-            get { return this.contact; }
+            get { return this.contacts; }
         }
 
-        private static ContactEntity decodeContact(string value)
+        private static Object decodeContact(string value)
         {
             XmlSerializer xml = new XmlSerializer(typeof(ContactEntity));
             StringReader reader = new StringReader(System.Net.WebUtility.HtmlDecode(value));
 
-            string foo = System.Net.WebUtility.HtmlDecode(value);
+            try
+            {
+                return (ContactEntity) xml.Deserialize(reader);
+            }
+            catch (Exception)
+            {
+                xml = new XmlSerializer(typeof(ContactCollection));
+                reader = new StringReader(System.Net.WebUtility.HtmlDecode(value));
 
-            return (ContactEntity) xml.Deserialize(reader);
+                return (ContactCollection)xml.Deserialize(reader);
+            }
         }
     }
 }
