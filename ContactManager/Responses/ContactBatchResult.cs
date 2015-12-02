@@ -71,7 +71,7 @@ namespace SimplyCast.ContactManager.Responses
         private static Object decodeContact(string value)
         {
             XmlSerializer xml = new XmlSerializer(typeof(ContactEntity));
-            StringReader reader = new StringReader(System.Net.WebUtility.HtmlDecode(value));
+            StringReader reader = new StringReader(value);
 
             try
             {
@@ -80,7 +80,7 @@ namespace SimplyCast.ContactManager.Responses
             catch (Exception)
             {
                 xml = new XmlSerializer(typeof(ContactCollection));
-                reader = new StringReader(System.Net.WebUtility.HtmlDecode(value));
+                reader = new StringReader(value);
 
                 return (ContactCollection)xml.Deserialize(reader);
             }
