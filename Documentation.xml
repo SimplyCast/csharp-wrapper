@@ -1487,6 +1487,36 @@
             to.</param>
             <returns>A representation of the newly created contact.</returns>
         </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.UpsertContact(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+            Perform an upsert operation by either creating a contact or merging
+            the given data into all contacts that match the provided merge 
+            column. For example, if the email field is provided in the fields
+            parameter and is also specified as the merge column, all contacts
+            with that email value will have their entries updated with the new
+            data. If there is no match, a new contact will be created.
+            </summary>
+            <param name="fields">The fields to create / update.</param>
+            <param name="mergeColumnID">The column ID to merge upon.</param>
+            <returns>A collection containing all contacts modified by the 
+            operation.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.UpsertContact(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Int32[])">
+            <summary>
+            Perform an upsert operation by either creating a contact or merging
+            the given data into all contacts that match the provided merge 
+            column. For example, if the email field is provided in the fields
+            parameter and is also specified as the merge column, all contacts
+            with that email value will have their entries updated with the new
+            data. If there is no match, a new contact will be created.
+            </summary>
+            <param name="fields">The fields to create / update.</param>
+            <param name="mergeColumnID">The column ID to merge upon.</param>
+            <returns>A collection containing all contacts modified by the 
+            <param name="listIDs">An array of list IDs to add the contact(s) to.
+            </param>
+            operation.</returns>
+        </member>
         <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetContact(System.Int32)">
             <summary>
             Get a contact from the contact database by its ID.

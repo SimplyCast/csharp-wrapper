@@ -157,7 +157,15 @@ namespace SimplyCast
                 return default(T);
             }
 
-            return (T) this._Deserialize<T>(responseData);
+            //Bypass the serializer if the caller wants to handle it itself.
+            if (typeof(T) == typeof(string))
+            {
+                return (T)Convert.ChangeType(responseData, typeof(T));
+            }
+            else
+            {
+                return (T)this._Deserialize<T>(responseData);
+            }
         }
 
         private string _GenerateAuthHeader(string method, string resource, string date, string requestBodyHash)

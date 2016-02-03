@@ -113,7 +113,6 @@ namespace SimplyCast
 
             Console.WriteLine("Created test list " + list.ID);
 
-
             //Retrieve our column mapping. We can use this to find out the
             //column IDs we'll need when setting contact fields. 
             ContactManager.Responses.ColumnCollection columns = api.ContactManager.GetColumns();
@@ -131,12 +130,24 @@ namespace SimplyCast
 
             Console.WriteLine("Created contact " + contact.ID);
 
+            //Attempt an 'upsert operation' on the created contact. The name
+            //should be updated to the given value.
+            Console.WriteLine("Attempting upsert (should update contact " + contact.ID + ").");
+            
+            fields[columns.GetByName("name").ID] = "Updated Test Contact";
+            ContactManager.Responses.ContactCollection contacts = api.ContactManager.UpsertContact(fields, columns.GetByName("email").ID);
+
+            foreach (ContactManager.Responses.ContactEntity c in contacts.Contacts)
+            {
+                Console.WriteLine("Updated contact " + c.ID + " (email address: " + c.GetFieldsByName("email")[0].Value + ") to have name '" + c.GetFieldsByName("name")[0].Value + "'.");
+            }
+
             //Run a query on the contact database to retrieve our contact. 
             //A contrived example, but an example nonetheless. The syntax 
             //is detailed in the online documentation, but basically looks
             //something like: '`colID` = "value" AND `col2ID` = "other value"'
             string query = "`" + columns.GetByName("email").ID + "` = \"test@example.com\" AND `"
-                + columns.GetByName("name").ID + "` = \"Test Contact\"";
+                + columns.GetByName("name").ID + "` = \"Updated Test Contact\"";
             Console.WriteLine("Executing query: " + query);
             ContactManager.Responses.ContactCollection queryResult = api.ContactManager.GetContacts(0, 100, query);
 

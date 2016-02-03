@@ -463,6 +463,105 @@ namespace SimplyCast.ContactManager
         }
         #endregion
 
+        #region UpsertContact
+
+        /// <summary>
+        /// Perform an upsert operation by either creating a contact or merging
+        /// the given data into all contacts that match the provided merge 
+        /// column. For example, if the email field is provided in the fields
+        /// parameter and is also specified as the merge column, all contacts
+        /// with that email value will have their entries updated with the new
+        /// data. If there is no match, a new contact will be created.
+        /// </summary>
+        /// <param name="fields">The fields to create / update.</param>
+        /// <param name="mergeColumnID">The column ID to merge upon.</param>
+        /// <returns>A collection containing all contacts modified by the 
+        /// operation.</returns>
+        public Responses.ContactCollection UpsertContact(Dictionary<string, string> fields, string mergeColumnID)
+        {
+            return this.UpsertContact(fields, mergeColumnID, new int[] {});
+        }
+
+        /// <summary>
+        /// Perform an upsert operation by either creating a contact or merging
+        /// the given data into all contacts that match the provided merge 
+        /// column. For example, if the email field is provided in the fields
+        /// parameter and is also specified as the merge column, all contacts
+        /// with that email value will have their entries updated with the new
+        /// data. If there is no match, a new contact will be created.
+        /// </summary>
+        /// <param name="fields">The fields to create / update.</param>
+        /// <param name="mergeColumnID">The column ID to merge upon.</param>
+        /// <returns>A collection containing all contacts modified by the 
+        /// <param name="listIDs">An array of list IDs to add the contact(s) to.
+        /// </param>
+        /// operation.</returns>
+        public Responses.ContactCollection UpsertContact(Dictionary<string, string> fields, string mergeColumnID, int[] listIDs)
+        {
+            Dictionary<string, string> queryParameters = new Dictionary<string, string>();
+            queryParameters.Add("mergecolumn", mergeColumnID);
+
+            Requests.ContactEntity contact = new Requests.ContactEntity();
+
+            Requests.FieldEntity[] fieldArray = new Requests.FieldEntity[fields.Count];
+            int fieldCounter = 0;
+            foreach (KeyValuePair<string, string> f in fields)
+            {
+                Requests.FieldEntity fieldEntity = new Requests.FieldEntity();
+                fieldEntity.ID = f.Key;
+                fieldEntity.Value = f.Value;
+                fieldArray[fieldCounter++] = fieldEntity;
+            }
+            contact.Fields = fieldArray;
+
+            if (listIDs.Length > 0)
+            {
+                int listCounter = 0;
+                Requests.ListEntity[] listArray = new Requests.ListEntity[listIDs.Length];
+                foreach (int id in listIDs)
+                {
+                    Requests.ListEntity listEntity = new Requests.ListEntity();
+                    listEntity.ID = id;
+                    listArray[listCounter++] = listEntity;
+                }
+                contact.ListIds = listArray;
+            }
+
+            contact.ID = null;
+ 
+            string xml = this.connection.Call<string>("POST", "contactmanager/contacts", queryParameters, contact);
+
+            //We're going to deserialize ourselves, since the response could be 
+            //either a contact collection or a contact entity. We're going to
+            //turn the contact entity into a collection for consistency.
+            using (System.Xml.XmlReader reader = new System.Xml.XmlTextReader(new System.IO.StringReader(xml)))
+            {
+                //If it's a collection, return it.
+                System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Responses.ContactCollection));
+                if (serializer.CanDeserialize(reader))
+                {
+                    return (Responses.ContactCollection) serializer.Deserialize(reader);
+                }
+
+                serializer = new System.Xml.Serialization.XmlSerializer(typeof(Responses.ContactEntity));
+
+                //If it's an entity, create a collection and put the contact in it.
+                if (serializer.CanDeserialize(reader))
+                {
+                    Responses.ContactEntity c = (Responses.ContactEntity) serializer.Deserialize(reader);
+                    Responses.ContactCollection contactCollection = new Responses.ContactCollection();
+
+                    contactCollection.Contacts = new Responses.ContactEntity[] { (Responses.ContactEntity) c };
+                    return contactCollection;
+                }
+                else {
+                    throw new Exception("Invalid XML response: could not deserialize into a ContactEntity or ContactCollection.");
+                }
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// Get a contact from the contact database by its ID.
         /// </summary>
