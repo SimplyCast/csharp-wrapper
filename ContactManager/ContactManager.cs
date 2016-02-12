@@ -138,14 +138,14 @@ namespace SimplyCast.ContactManager
         /// More details on what values can be queried upon are available 
         /// in the API reference docs.</param>
         /// <returns>A ListCollection of lists.</returns>
-        public Responses.ListCollection GetLists(int offset, int limit, string query)
+        public Responses.ListCollection GetLists(int offset, int limit, string listName)
         {
             Dictionary<string, string> queryParams = new Dictionary<string, string>(3);
             queryParams.Add("offset", offset.ToString());
             queryParams.Add("limit", limit.ToString());
 
-            if (query.Length > 0) {
-                queryParams.Add("query", query);
+            if (listName.Length > 0) {
+                queryParams.Add("listName", listName);
             }
 
             return this.connection.Call<Responses.ListCollection>(SimplyCastAPI.GET, "contactmanager/lists", queryParams, null);
@@ -185,7 +185,7 @@ namespace SimplyCast.ContactManager
         /// <returns>A ListCollection of matching contact lists.</returns>
         public Responses.ListCollection GetListsByName(string name)
         {
-            return this.GetLists(0, 100, "`name` = '" + name + "'");
+            return this.GetLists(0, 100, name);
         }
 
         /// <summary>
