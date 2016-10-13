@@ -122,11 +122,17 @@ namespace SimplyCast
             HttpWebResponse webResponse;
             try
             {
-                webResponse = (HttpWebResponse) webHandle.GetResponse();
+                webResponse = (HttpWebResponse)webHandle.GetResponse();
             }
             catch (WebException e)
             {
-                webResponse = (HttpWebResponse) e.Response;
+                if (e.Response != null)
+                {
+                    webResponse = (HttpWebResponse)e.Response;
+                } else
+                {
+                    throw e;
+                }
             }
 
             Stream receiveStream = webResponse.GetResponseStream();
