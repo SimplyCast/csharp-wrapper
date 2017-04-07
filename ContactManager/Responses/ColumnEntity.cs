@@ -162,7 +162,31 @@ namespace SimplyCast.ContactManager.Responses
             /// This column type specifically stores dates/times.
             /// </summary>
             [XmlEnum("date")]
-            Date = 1
+            Date = 1,
+
+            /// <summary>
+            /// This column type specifically stores Integers.
+            /// </summary>
+            [XmlEnum("int")]
+            Integer = 2,
+
+            /// <summary>
+            /// This column type specifically stores Number.
+            /// </summary>
+            [XmlEnum("number")]
+            Number = 3,
+
+            /// <summary>
+            /// This column type specifically stores bool.
+            /// </summary>
+            [XmlEnum("bool")]
+            Boolean = 4,
+
+            /// <summary>
+            /// This column type specifically stores text.
+            /// </summary>
+            [XmlEnum("text")]
+            Text = 5,
         }
     }
 }
