@@ -38,7 +38,28 @@ namespace SimplyCast.ContactManager
             /// <summary>
             /// This column type specifically stores dates/times.
             /// </summary>
-            Date = 1
+            Date = 1,
+
+            /// <summary>
+            /// This column type specifically stores Integers.
+            /// </summary>
+            Integer = 2,
+
+            /// <summary>
+            /// This column type specifically stores Number.
+            /// </summary>
+            Number = 3,
+
+            /// <summary>
+            /// This column type specifically stores bool.
+            /// </summary>
+            Boolean = 4,
+
+            /// <summary>
+            /// This column type specifically stores text.
+            /// </summary>
+            Text = 5,
+
         }
 
         /// <summary>

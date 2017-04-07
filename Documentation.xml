@@ -4,213 +4,76 @@
         <name>SimplyCast</name>
     </assembly>
     <members>
-        <member name="T:SimplyCast.SimplyCastAPIConnector">
+        <member name="T:SimplyCast.ContactManager.Requests.ContactBatchCollection">
             <summary>
-            SimplyCast REST API connector.
-            See https://app.simplycast.com/?q=api/reference
+            A batch contact upload request entity representation.
             </summary>
         </member>
-        <member name="F:SimplyCast.SimplyCastAPIConnector.publicKey">
+        <member name="P:SimplyCast.ContactManager.Requests.ContactBatchCollection.Contacts">
             <summary>
-            The public key, used to identify the user.
+            An array of contact entries to create.
             </summary>
         </member>
-        <member name="F:SimplyCast.SimplyCastAPIConnector.secretKey">
+        <member name="T:SimplyCast.ContactManager.Requests.ColumnEntity">
             <summary>
-            The secret key, used in generating signatures.
+            A column request entity representation.
             </summary>
         </member>
-        <member name="F:SimplyCast.SimplyCastAPIConnector.apiURL">
+        <member name="P:SimplyCast.ContactManager.Requests.ColumnEntity.Name">
             <summary>
-            API URL, sans the resource endpoint.
+            A column name.
             </summary>
         </member>
-        <member name="M:SimplyCast.SimplyCastAPIConnector.#ctor(System.String,System.String)">
+        <member name="P:SimplyCast.ContactManager.Requests.ColumnEntity.Type">
             <summary>
-            API constructor
-            </summary>
-            <param name="publicKey">The public key to make the request with.</param>
-            <param name="secretKey">The secret key to make the request with.</param>
-        </member>
-        <member name="M:SimplyCast.SimplyCastAPIConnector.Call``1(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object)">
-            <summary>
-            Main API calling function.
-            </summary>
-            <typeparam name="T">The entity response return type.</typeparam>
-            <param name="method">The HTTP method (GET, POST, etc).</param>
-            <param name="resource">The API resource (the part of the URL 
-            between the base URL and the query parameters.</param>
-            <param name="queryParameters">A dictionary of request query 
-            parameters.</param>
-            <param name="requestBody">A serializable object containing the
-            rquest body.</param>
-            <returns>A response entity.</returns>
-        </member>
-        <member name="M:SimplyCast.SimplyCastAPIConnector.BytesToHex(System.Byte[])">
-            <summary>
-            Given an array of bytes, convert it to a hex representation.
-            </summary>
-            <param name="bytes">The array of bytes to convert.</param>
-            <returns>A hex string.</returns>
-        </member>
-        <member name="T:SimplyCast.ResourceAPI">
-            <summary>
-            This class is the one that all resource collection APIs decend from.
+            The column type.
             </summary>
         </member>
-        <member name="F:SimplyCast.ResourceAPI.connection">
+        <member name="P:SimplyCast.ContactManager.Requests.ColumnEntity.MergeTags">
             <summary>
-            The API connection used to make requests with.
+            A collection of merge tags.
             </summary>
         </member>
-        <member name="M:SimplyCast.ResourceAPI.#ctor(SimplyCast.SimplyCastAPIConnector)">
+        <member name="T:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType">
             <summary>
-            Constructor.
-            </summary>
-            <param name="connection">The API connection, provided by 
-            the SimplyCastAPI class.</param>
-        </member>
-        <member name="T:SimplyCast.SimplyCast360.Responses.ContactEntity">
-            <summary>
-            A representation of a 360 contact entry.
+            An enum of column data types.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.ID">
+        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.String">
             <summary>
-            The 360 handle ID for the contact instance.
+            This column type stores general data (string or numeric).
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.ContactID">
+        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.Date">
             <summary>
-            The contact's ID in the contact manager.
+            This column type specifically stores dates/times.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.ListID">
+        <member name="T:SimplyCast.ContactManager.Requests.ContactIDCollection">
             <summary>
-            The ID of a list that the contact belongs to.
+            A representation for the 'add contacts to list' API call.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.Links">
+        <member name="F:SimplyCast.ContactManager.Requests.ContactIDCollection.contactIds">
             <summary>
-            A collection of relation links for the project.
+            A collection of contact IDs to place in the request.
             </summary>
         </member>
-        <member name="T:SimplyCast.SimplyCast360.Requests.ListEntity">
+        <member name="T:SimplyCast.ContactManager.Requests.ContactIDCollection.Contacts">
             <summary>
-            A list request entity for pushing to an inbound 360 connection
-            endpoint.
+            Struct to enforce the XML request schema.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Requests.ListEntity.List">
+        <member name="F:SimplyCast.ContactManager.Requests.ContactIDCollection.Contacts.ID">
             <summary>
-            The list to push to a 360 inbound connection endpoint.
+            A contact ID.
             </summary>
         </member>
-        <member name="T:SimplyCast.SimplyCastAPI">
+        <member name="M:SimplyCast.ContactManager.Requests.ContactIDCollection.addContactID(System.Int32)">
             <summary>
-            This is the base API class that is used to make all requests to the
-            API. 
+            Add a contact ID to the request collection.
             </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCastAPI.GET">
-            <summary>
-            HTTP GET method constant.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCastAPI.POST">
-            <summary>
-            HTTP POST method constant.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCastAPI.DELETE">
-            <summary>
-            HTTP DELETE method constant.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCastAPI.connection">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCastAPI.contactManager">
-            <summary>
-            Contact manager API handle.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCastAPI.simplycast360">
-            <summary>
-            360 API handle.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.SimplyCastAPI.#ctor(System.String,System.String)">
-            <summary>
-            Main API class constructor.
-            </summary>
-            <param name="publicKey">The desired account API public key.</param>
-            <param name="secretKey">The desired account API secret key.</param>
-        </member>
-        <member name="P:SimplyCast.SimplyCastAPI.ContactManager">
-            <summary>
-            Contact manager API resource container.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCastAPI.SimplyCast360">
-            <summary>
-            360 API resource container.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.ListCollection">
-            <summary>
-            This class contains a collection of contact list entities and fully 
-            supports XML serialization.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.Common.Responses.GenericCollection">
-            <summary>
-            This class is a helper for other collection classes, as they will often
-            share the attributes below.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.Common.Responses.GenericCollection.TotalCount">
-            <summary>
-            Total count represents the total number of entities available on
-            the resource before filtering.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.Common.Responses.GenericCollection.FilterCount">
-            <summary>
-            Filter count represents the total number of entities available on
-            the resource after any filtering queries (excluding offset/limit)
-            are applied.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.Common.Responses.GenericCollection.ResponseCount">
-            <summary>
-            Response count is the number of entities returned in the response, 
-            provided as a convenience.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.Common.Responses.GenericCollection.Links">
-            <summary>
-            A collection of relation links. Used for paging; next and prev 
-            links will contain the appropriate query parameters for retrieving
-            the next and previous pages.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.ListCollection.Lists">
-            <summary>
-            An collection of contact list entities.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Requests.SuppressionEntries">
-            <summary>
-            A suppression list request entity.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.SuppressionEntries.Values">
-            <summary>
-            An array of entries to add to a suppression list.
-            </summary>
+            <param name="ID">The contact ID.</param>
         </member>
         <member name="T:SimplyCast.ContactManager.Requests.MetadataColumnEntity">
             <summary>
@@ -227,78 +90,89 @@
             The metadata column type.
             </summary>
         </member>
-        <member name="T:SimplyCast.SimplyCast360.Responses.ContactCollection">
+        <member name="T:SimplyCast.ContactManager.Requests.MetadataFieldEntity">
             <summary>
-            This class contains a collection of contact entity representations
-            and fully supports XML serialization.
+            An XML request entity.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ContactCollection.Contacts">
+        <member name="P:SimplyCast.ContactManager.Requests.MetadataFieldEntity.Values">
             <summary>
-            A collection of contact entity representations.
+            A metadata field value to modify.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Responses.ContactCollection">
+        <member name="T:SimplyCast.ContactManager.Requests.SuppressionEntries">
             <summary>
-            This class contains a collection of contact entity representations
-            and fully supports XML serialization.
+            A suppression list request entity.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.ContactCollection.Contacts">
+        <member name="P:SimplyCast.ContactManager.Requests.SuppressionEntries.Values">
             <summary>
-            A collection of contact entity representations.
+            An array of entries to add to a suppression list.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Requests.ContactIDCollection">
+        <member name="T:SimplyCast.ContactManager.Requests.ContactEntity">
             <summary>
-            A representation for the 'add contacts to list' API call.
+            This class contains contact request information.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.Requests.ContactIDCollection.contactIds">
+        <member name="P:SimplyCast.ContactManager.Requests.ContactEntity.ID">
             <summary>
-            A collection of contact IDs to place in the request.
+            The ID attribute; only used when adding a contact to a list.
             </summary>
         </member>
-        <member name="M:SimplyCast.ContactManager.Requests.ContactIDCollection.addContactID(System.Int32)">
+        <member name="P:SimplyCast.ContactManager.Requests.ContactEntity.Fields">
             <summary>
-            Add a contact ID to the request collection.
-            </summary>
-            <param name="ID">The contact ID.</param>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Requests.ContactIDCollection.Contacts">
-            <summary>
-            Struct to enforce the XML request schema.
+            A collection of fields to set when creating or updating.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.Requests.ContactIDCollection.Contacts.ID">
+        <member name="P:SimplyCast.ContactManager.Requests.ContactEntity.ListIds">
             <summary>
-            A contact ID.
+            A collection of contact list IDs that is used when assigning a 
+            contact to a list.
             </summary>
         </member>
-        <member name="T:SimplyCast.SimplyCast360.Requests.ContactEntity">
+        <member name="T:SimplyCast.ContactManager.Requests.FieldEntity">
             <summary>
-            A contact entity request for pushing to an inbound 360 connection.
+            This class contains request information for creating or modifying a 
+            contact field.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.ID">
+        <member name="M:SimplyCast.ContactManager.Requests.FieldEntity.#ctor">
             <summary>
-            The ID of the contact.
+            Default constructor.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.List">
+        <member name="M:SimplyCast.ContactManager.Requests.FieldEntity.#ctor(System.String,System.String)">
             <summary>
-            The list that contains the contact to push.
+            Constructor.
+            </summary>
+            <param name="id">The field ID.</param>
+            <param name="value">The field value.</param>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Requests.FieldEntity.ID">
+            <summary>
+            The column identifier of the field to set.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.Row">
+        <member name="P:SimplyCast.ContactManager.Requests.FieldEntity.Value">
             <summary>
-            The contact to push.
+            The value of the field.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.Links">
+        <member name="T:SimplyCast.ContactManager.Requests.ListEntity">
             <summary>
-            A collection of relation links containing at least a 
-            self-reference.
+            This class contains list-specific request information that can be 
+            serialized.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Requests.ListEntity.ID">
+            <summary>
+            The list ID, specified in requests that assign a contact to a list.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Requests.ListEntity.Name">
+            <summary>
+            A contact list name, used when creating or renaming a list.
             </summary>
         </member>
         <member name="T:SimplyCast.ContactManager.Responses.ContactBatchResponse">
@@ -356,6 +230,202 @@
             <summary>
             Error batch status.
             </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.ContactBatchResult">
+            <summary>
+            A result object representation of a batch operation API call.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResult.HttpResponseCode">
+            <summary>
+            HTTP response code of the individual request.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResult.RawContact">
+            <summary>
+            Raw response setter for deserialization.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResult.ContactCollection">
+            <summary>
+            Accessor for the contact entity returned as part of the request.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.ContactBatchResultCollection">
+            <summary>
+            A result object representation of a batch operation API call.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResultCollection.Results">
+            <summary>
+            An array of contact batch result objects.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.SuppressionCollection">
+            <summary>
+            A collection of suppression entries.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.SuppressionCollection.SuppressionEntries">
+            <summary>
+            A collection of suppression entries.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.SuppressionEntry">
+            <summary>
+            A representation of a suppression list entry.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.Value">
+            <summary>
+            The suppressed contact value for the entry (an email address, phone
+            number, etc.)
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.Added">
+            <summary>
+            The date and time that the value was added.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.HardBounced">
+            <summary>
+            If the entry is an email address, 1 indicates that the value was
+            a hard bounce.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.MetadataFieldCollection">
+            <summary>
+            This class contains a collection of metadata column entity 
+            representations and supports XML serialization.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldCollection.MetadataFields">
+            <summary>
+            A collection of metadata column entities.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.MetadataFieldEntity">
+            <summary>
+            This class represents a metadata entity representation and supports XML
+            serialization. Metadata entries are a more flexible way of storing 
+            ancillary contact information such as tagging and lead scoring, 
+            especially when not requiring broad queries or when storing conditional
+            data (things that may or may not exist, depending on context).
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.ID">
+            <summary>
+            The ID of metadata column. Can be used to directly access the 
+            metadata column representation.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Name">
+            <summary>
+            The name of the metadata field.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Type">
+            <summary>
+            The metadata field type.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.IsUserDefined">
+            <summary>
+            A flag indicating if the column is user-defined or if it is a 
+            system column. 
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.IsVisible">
+            <summary>
+            A flag indicating if the column is visible in the user interface.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.IsEditable">
+            <summary>
+            A flag indicating if the column is editable.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Values">
+            <summary>
+            The metadata values.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Links">
+            <summary>
+            A collection of relation links. Will contain a link to the metadata
+            column resource.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.ContactManager.Responses.MetadataFieldEntity.GetSchema">
+            <summary>
+            Unused method of IXmlSerializable.
+            </summary>
+            <returns>null</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.Responses.MetadataFieldEntity.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Deserialized an XML response into an instance of this object.
+            </summary>
+            <param name="reader">An XmlReader object.</param>
+        </member>
+        <member name="M:SimplyCast.ContactManager.Responses.MetadataFieldEntity.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            This object is never intended to be serialized, so it is not 
+            implemented.
+            </summary>
+            <param name="writer">An XmlWriter.</param>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType">
+            <summary>
+            Enum representing the types of metadata columns available.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.SingleString">
+            <summary>
+            This column type holds a single string value.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.SingleNumber">
+            <summary>
+            This column type holds a single numeric value.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.MultiString">
+            <summary>
+            This column type holds multiple string values.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.MultiNumber">
+            <summary>
+            This column type holds multiple numeric values.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.SumNumber">
+            <summary>
+            This column type acts as a numeric adder. For example, if the 
+            value of the column is currently 5 and you 'set' the value to
+            4, the value will become 9.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.ColumnCollection">
+            <summary>
+            This class contains a collection of column entity representations and
+            supports XML serialization.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.ColumnCollection.Columns">
+            <summary>
+            A collection of column entity representations.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.ContactManager.Responses.ColumnCollection.GetByName(System.String)">
+            <summary>
+            Get a column by its name. If there is more than one column
+            with the same name, only the first one found will be returned.
+            </summary>
+            <param name="name">The name of the column to find.</param>
+            <returns>The column entity that matched, or null if the column
+            is not found.</returns>
         </member>
         <member name="T:SimplyCast.ContactManager.Responses.ColumnEntity">
             <summary>
@@ -442,227 +512,15 @@
             This column type specifically stores dates/times.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Requests.ListEntity">
+        <member name="T:SimplyCast.ContactManager.Responses.ContactCollection">
             <summary>
-            This class contains list-specific request information that can be 
-            serialized.
+            This class contains a collection of contact entity representations
+            and fully supports XML serialization.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ListEntity.ID">
+        <member name="P:SimplyCast.ContactManager.Responses.ContactCollection.Contacts">
             <summary>
-            The list ID, specified in requests that assign a contact to a list.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ListEntity.Name">
-            <summary>
-            A contact list name, used when creating or renaming a list.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.Common.Responses.Error">
-            <summary>
-            Helper class for deserializing XML errors.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.Common.Responses.Error.Message">
-            <summary>
-            The text summary of the error encountered.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.Examples">
-            <summary>
-            This class provides example functions that run through the 
-            functionality provided by the C# API wrapper.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.Examples.#ctor(SimplyCast.SimplyCastAPI)">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="apiHandle"></param>
-        </member>
-        <member name="M:SimplyCast.Examples.ListManagementExample">
-            <summary>
-            List management resource examples.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.Examples.ContactManagementExample">
-            <summary>
-            Examples of contact management resources. 
-            </summary>
-        </member>
-        <member name="M:SimplyCast.Examples.ContactBatchExample">
-            <summary>
-            Example of creating multiple contacts via batch. Also provides an 
-            example of updating existing contacts by merging upon an existing
-            column (this will create a new contact if there are no merge
-            candidates).
-            
-            Note that this is functionality is not backwards-compatible with
-            version 1.1. Because merging upon a column could return one or
-            more contact responses (if multiple merge candidates are found), 
-            ContactBatchResult now contains a ContactCollection object instead
-            of a ContactEntity object. The example is updated to show the new
-            usage.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.Examples.ColumnManagementExample">
-            <summary>
-            Examples of the column management resources.
-            
-            Currently, there aren't many operations that can be done on
-            columns via the API. Columns can only be created and 
-            retrieved. If you have to create many columns, it is 
-            recommended to use metadata columns instead. They're much
-            more flexible and it is possible to do things like 
-            delete them. For example, things like email address should
-            be standard columns, things like tags and lead scoring should
-            be metadata.
-            
-            WARNING: running this example will result in unreversable 
-            changes - the created column cannot be deleted.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.Examples.MetadataColumnManagementExample">
-            <summary>
-            Metadata column management examples.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.Examples.SimplyCast360Example(System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            360 Examples. This example requires you to create a test 360 
-            project that contains an inbound and outbound 360 API connection
-            node, and the ID of a contact to test with.
-            
-            NOTE that this will remove things from outbound nodes. Make sure
-            your project you test with is indeed a testing project.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.ContactBatchResultCollection">
-            <summary>
-            A result object representation of a batch operation API call.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResultCollection.Results">
-            <summary>
-            An array of contact batch result objects.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.MetadataColumnEntity">
-            <summary>
-            This class represents a metadata entity representation and supports XML
-            serialization. Metadata entries are a more flexible way of storing 
-            ancillary contact information such as tagging and lead scoring, 
-            especially when not requiring broad queries or when storing conditional
-            data (things that may or may not exist, depending on context).
-            </summary>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnEntity.GetSchema">
-            <summary>
-            Unused method of IXmlSerializable.
-            </summary>
-            <returns>null</returns>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ReadXml(System.Xml.XmlReader)">
-            <summary>
-            Deserialized an XML response into an instance of this object.
-            </summary>
-            <param name="reader">An XmlReader object.</param>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnEntity.WriteXml(System.Xml.XmlWriter)">
-            <summary>
-            This object is never intended to be serialized, so it is not 
-            implemented.
-            </summary>
-            <param name="writer">An XmlWriter.</param>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ID">
-            <summary>
-            The ID of metadata column. Can be used to directly access the 
-            metadata column representation.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.Name">
-            <summary>
-            The name of the metadata field.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.Type">
-            <summary>
-            The metadata field type.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.IsUserDefined">
-            <summary>
-            A flag indicating if the column is user-defined or if it is a 
-            system column. 
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.IsVisible">
-            <summary>
-            A flag indicating if the column is visible in the user interface.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.IsEditable">
-            <summary>
-            A flag indicating if the column is editable.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.Links">
-            <summary>
-            A collection of relation links. Will contain a link to the metadata
-            column resource.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType">
-            <summary>
-            Enum representing the types of metadata columns available.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.SingleString">
-            <summary>
-            This column type holds a single string value.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.SingleNumber">
-            <summary>
-            This column type holds a single numeric value.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.MultiString">
-            <summary>
-            This column type holds multiple string values.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.MultiNumber">
-            <summary>
-            This column type holds multiple numeric values.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.SumNumber">
-            <summary>
-            This column type acts as a numeric adder. For example, if the 
-            value of the column is currently 5 and you 'set' the value to
-            4, the value will become 9.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.MetadataColumnCollection">
-            <summary>
-            This class contains a collection of metadata column entity 
-            representations and supports XML serialization.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnCollection.GetByName(System.String)">
-            <summary>
-            Get a column by its name. If there is more than one column
-            with the same name, only the first one found will be returned.
-            </summary>
-            <param name="name">The name of the column to find.</param>
-            <returns>The column entity that matched, or null if the column
-            is not found.</returns>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnCollection.MetadataColumns">
-            <summary>
-            A collection of metadata column entities.
+            A collection of contact entity representations.
             </summary>
         </member>
         <member name="T:SimplyCast.ContactManager.Responses.ContactEntity">
@@ -671,17 +529,6 @@
             supports XML serialization. Field information (email, name, etc.)
             is accessible via the Fields property.
             </summary>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Responses.ContactEntity.GetFieldsByName(System.String)">
-            <summary>
-            This method is provided as a helper for extracting a field by the 
-            column name. Because column names aren't guaranteed to be unique, 
-            this method returns a list of field entities (you'll probably only
-            care about the first).
-            </summary>
-            <param name="name">The name of the field(s) to retrieve.</param>
-            <returns>A list of the matching field entities. If you want the 
-            value, access the Value property.</returns>
         </member>
         <member name="P:SimplyCast.ContactManager.Responses.ContactEntity.ID">
             <summary>
@@ -718,104 +565,26 @@
             the contact resource that this contact exists at.
             </summary>
         </member>
-        <member name="T:SimplyCast.SimplyCast360.Responses.ProjectEntity">
+        <member name="M:SimplyCast.ContactManager.Responses.ContactEntity.GetFieldsByName(System.String)">
             <summary>
-            This class represents a 360 project.
+            This method is provided as a helper for extracting a field by the 
+            column name. Because column names aren't guaranteed to be unique, 
+            this method returns a list of field entities (you'll probably only
+            care about the first).
+            </summary>
+            <param name="name">The name of the field(s) to retrieve.</param>
+            <returns>A list of the matching field entities. If you want the 
+            value, access the Value property.</returns>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.FieldCollection">
+            <summary>
+            This class contains a collection of field entities and fully supports 
+            XML serialization.
             </summary>
         </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.ID">
+        <member name="P:SimplyCast.ContactManager.Responses.FieldCollection.Fields">
             <summary>
-            The ID of the 360 project.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Name">
-            <summary>
-            The name of the 360 project.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Active">
-            <summary>
-            XML serialization property for the active flag. Use IsActive to 
-            check the value.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.IsActive">
-            <summary>
-            Returns the active state of the 360 project.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Connections">
-            <summary>
-            Return all the API connection endpoints for the requested 360
-            project. 
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Links">
-            <summary>
-            A collection of relation links for the project.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Requests.FieldEntity">
-            <summary>
-            This class contains request information for creating or modifying a 
-            contact field.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Requests.FieldEntity.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Requests.FieldEntity.#ctor(System.String,System.String)">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="id">The field ID.</param>
-            <param name="value">The field value.</param>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.FieldEntity.ID">
-            <summary>
-            The column identifier of the field to set.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.FieldEntity.Value">
-            <summary>
-            The value of the field.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Requests.ColumnEntity">
-            <summary>
-            A column request entity representation.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ColumnEntity.Name">
-            <summary>
-            A column name.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ColumnEntity.Type">
-            <summary>
-            The column type.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ColumnEntity.MergeTags">
-            <summary>
-            A collection of merge tags.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType">
-            <summary>
-            An enum of column data types.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.String">
-            <summary>
-            This column type stores general data (string or numeric).
-            </summary>
-        </member>
-        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.Date">
-            <summary>
-            This column type specifically stores dates/times.
+            A collection of field entities.
             </summary>
         </member>
         <member name="T:SimplyCast.ContactManager.Responses.FieldEntity">
@@ -892,307 +661,15 @@
             disabled in requests as a means to reduce overhead.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Requests.MetadataFieldEntity">
+        <member name="T:SimplyCast.ContactManager.Responses.ListCollection">
             <summary>
-            An XML request entity.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.MetadataFieldEntity.Values">
-            <summary>
-            A metadata field value to modify.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.SimplyCast360.SimplyCast360API">
-            <summary>
-            SimplyCast 360 API class.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.#ctor(SimplyCast.SimplyCastAPIConnector)">
-            <summary>
-            Pass-thru constructor.
-            </summary>
-            <param name="connector">The API connection to make requests 
-            with.</param>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetProject(System.Int32)">
-            <summary>
-            Get a 360 project. The ID of a 360 project can be retrieved from
-            the user interface of the 360 project.
-            </summary>
-            <param name="projectID">The ID of the project to retrieve.</param>
-            <returns>A representation of a 360 project (and the API connections
-            contained within).</returns>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetConnection(System.Int32,SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType,System.Int32)">
-            <summary>
-            Get a connection endpoint by ID. The ID of a connection endpoint
-            can be retrieved from the user interface of the 360 project.
-            </summary>
-            <param name="projectID">The ID of the project containing the 
-            connection.</param>
-            <param name="type">The connection endpoint type.</param>
-            <param name="connectionID">The connection endpoint ID.</param>
-            <returns>A representation of the connection endpoint.</returns>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetOutboundContacts(System.Int32,System.Int32)">
-            <summary>
-            Retrieve a collection of contacts from an outbound connection 
-            endpoint.
-            </summary>
-            <param name="projectID">A 360 project ID.</param>
-            <param name="connectionID">An outbound API connection ID.</param>
-            <returns>A collection of contact representations.</returns>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetOutboundContact(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="projectID"></param>
-            <param name="connectionID"></param>
-            <param name="contactID"></param>
-            <returns>A represenation of the contact entry in the outbound 
-            connection node.</returns>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.PushList(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Submit a list to an inbound API connection endpoint.
-            </summary>
-            <param name="projectID">A 360 project ID.</param>
-            <param name="connectionID">A 360 API connection endpoint ID.
-            </param>
-            <param name="listID">The ID of the list to push into the 360
-            project.</param>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.PushContact(System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Submit a contact to an inbound API connection endpoint.
-            </summary>
-            <param name="projectID">A 360 project ID.</param>
-            <param name="connectionID">A 360 API connection endpoint ID.
-            </param>
-            <param name="listID">The ID of a list that the contact belongs to.
-            </param>
-            <param name="contactID">The ID of the contact to push into the 
-            360 workflow.</param>
-        </member>
-        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.DeleteContact(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Delete a contact from an outbound node. This only removes the
-            contact from the outbound processing queue (permanently). 
-            </summary>
-            <param name="projectID">The ID of the project.</param>
-            <param name="connectionID">The ID of the connection.</param>
-            <param name="contactID">The ID of the contact to remove. This must
-            be the 360 contact ID, not the contact manager contact ID.</param>
-        </member>
-        <member name="T:SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType">
-            <summary>
-            The types of API connection endpoints that are available for 360
-            projects.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType.Inbound">
-            <summary>
-            An inbound connection type.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType.Outbound">
-            <summary>
-            An outbound connection.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.SuppressionEntry">
-            <summary>
-            A representation of a suppression list entry.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.Value">
-            <summary>
-            The suppressed contact value for the entry (an email address, phone
-            number, etc.)
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.Added">
-            <summary>
-            The date and time that the value was added.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.HardBounced">
-            <summary>
-            If the entry is an email address, 1 indicates that the value was
-            a hard bounce.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.SimplyCast360.Responses.ConnectionEntity">
-            <summary>
-            An API connection endpoint of a 360 project.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ID">
-            <summary>
-            The unique ID of the connection.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Name">
-            <summary>
-            The name of the connection.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Type">
-            <summary>
-            The connection type (inbound connection or outbound connection).
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Active">
-            <summary>
-            XML deserialization property. Use IsActive to retrieve the value.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.IsActive">
-            <summary>
-            Indicates the status of the connection. Inactive connections 
-            will not do anything.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Links">
-            <summary>
-            A collection of relation links for the connection.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ConnectionType">
-            <summary>
-            The types of API connection endpoints that are available for 360
-            projects.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ConnectionType.Inbound">
-            <summary>
-            An inbound connection type.
-            </summary>
-        </member>
-        <member name="F:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ConnectionType.Outbound">
-            <summary>
-            An outbound connection.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.FieldCollection">
-            <summary>
-            This class contains a collection of field entities and fully supports 
-            XML serialization.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.FieldCollection.Fields">
-            <summary>
-            A collection of field entities.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.MetadataFieldCollection">
-            <summary>
-            This class contains a collection of metadata column entity 
-            representations and supports XML serialization.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldCollection.MetadataFields">
-            <summary>
-            A collection of metadata column entities.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.ColumnCollection">
-            <summary>
-            This class contains a collection of column entity representations and
+            This class contains a collection of contact list entities and fully 
             supports XML serialization.
             </summary>
         </member>
-        <member name="M:SimplyCast.ContactManager.Responses.ColumnCollection.GetByName(System.String)">
+        <member name="P:SimplyCast.ContactManager.Responses.ListCollection.Lists">
             <summary>
-            Get a column by its name. If there is more than one column
-            with the same name, only the first one found will be returned.
-            </summary>
-            <param name="name">The name of the column to find.</param>
-            <returns>The column entity that matched, or null if the column
-            is not found.</returns>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.ColumnCollection.Columns">
-            <summary>
-            A collection of column entity representations.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.Common.Responses.RelationLink">
-            <summary>
-            This class represents a relation link. Relation links assist in 
-            navigating through API resources.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.Common.Responses.RelationLink.Rel">
-            <summary>
-            The type of relation (self referencing, next/previous page, etc).
-            </summary>
-        </member>
-        <member name="P:SimplyCast.Common.Responses.RelationLink.URL">
-            <summary>
-            The destination resource of the relation.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.APIException.#ctor">
-            <summary>
-            APIExceptions are thrown when a 400 or 500 series error is 
-            encountered in an API call.
-            </summary>
-        </member>
-        <member name="M:SimplyCast.APIException.#ctor(System.String)">
-            <summary>
-            APIExceptions are thrown when a 400 or 500 series error is 
-            encountered in an API call.
-            </summary>
-            <param name="message">The error message.</param>
-        </member>
-        <member name="M:SimplyCast.APIException.#ctor(System.String,System.Exception)">
-            <summary>
-            APIExceptions are thrown when a 400 or 500 series error is 
-            encountered in an API call.
-            </summary>
-            <param name="message">The error message.</param>
-            <param name="inner">Inner exception.</param>
-        </member>
-        <member name="P:SimplyCast.APIException.StatusCode">
-            <summary>
-            The HTTP status code of the error response.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.APIException.StatusDescription">
-            <summary>
-            The status description of the error response.
-            
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Responses.ContactBatchResult">
-            <summary>
-            A result object representation of a batch operation API call.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResult.HttpResponseCode">
-            <summary>
-            HTTP response code of the individual request.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResult.RawContact">
-            <summary>
-            Raw response setter for deserialization.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.ContactBatchResult.ContactCollection">
-            <summary>
-            Accessor for the contact entity returned as part of the request.
-            </summary>
-        </member>
-        <member name="T:SimplyCast.ContactManager.Requests.ContactBatchCollection">
-            <summary>
-            A batch contact upload request entity representation.
-            </summary>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ContactBatchCollection.Contacts">
-            <summary>
-            An array of contact entries to create.
+            An collection of contact list entities.
             </summary>
         </member>
         <member name="T:SimplyCast.ContactManager.Responses.ListEntity">
@@ -1237,25 +714,122 @@
             A collection of relation links. Will contain a link to the contact list.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Requests.ContactEntity">
+        <member name="T:SimplyCast.ContactManager.Responses.MetadataColumnCollection">
             <summary>
-            This class contains contact request information.
+            This class contains a collection of metadata column entity 
+            representations and supports XML serialization.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ContactEntity.ID">
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnCollection.MetadataColumns">
             <summary>
-            The ID attribute; only used when adding a contact to a list.
+            A collection of metadata column entities.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ContactEntity.Fields">
+        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnCollection.GetByName(System.String)">
             <summary>
-            A collection of fields to set when creating or updating.
+            Get a column by its name. If there is more than one column
+            with the same name, only the first one found will be returned.
+            </summary>
+            <param name="name">The name of the column to find.</param>
+            <returns>The column entity that matched, or null if the column
+            is not found.</returns>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.MetadataColumnEntity">
+            <summary>
+            This class represents a metadata entity representation and supports XML
+            serialization. Metadata entries are a more flexible way of storing 
+            ancillary contact information such as tagging and lead scoring, 
+            especially when not requiring broad queries or when storing conditional
+            data (things that may or may not exist, depending on context).
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Requests.ContactEntity.ListIds">
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ID">
             <summary>
-            A collection of contact list IDs that is used when assigning a 
-            contact to a list.
+            The ID of metadata column. Can be used to directly access the 
+            metadata column representation.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.Name">
+            <summary>
+            The name of the metadata field.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.Type">
+            <summary>
+            The metadata field type.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.IsUserDefined">
+            <summary>
+            A flag indicating if the column is user-defined or if it is a 
+            system column. 
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.IsVisible">
+            <summary>
+            A flag indicating if the column is visible in the user interface.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.IsEditable">
+            <summary>
+            A flag indicating if the column is editable.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.MetadataColumnEntity.Links">
+            <summary>
+            A collection of relation links. Will contain a link to the metadata
+            column resource.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnEntity.GetSchema">
+            <summary>
+            Unused method of IXmlSerializable.
+            </summary>
+            <returns>null</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Deserialized an XML response into an instance of this object.
+            </summary>
+            <param name="reader">An XmlReader object.</param>
+        </member>
+        <member name="M:SimplyCast.ContactManager.Responses.MetadataColumnEntity.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            This object is never intended to be serialized, so it is not 
+            implemented.
+            </summary>
+            <param name="writer">An XmlWriter.</param>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType">
+            <summary>
+            Enum representing the types of metadata columns available.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.SingleString">
+            <summary>
+            This column type holds a single string value.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.SingleNumber">
+            <summary>
+            This column type holds a single numeric value.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.MultiString">
+            <summary>
+            This column type holds multiple string values.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.MultiNumber">
+            <summary>
+            This column type holds multiple numeric values.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.MetadataColumnEntity.ColumnType.SumNumber">
+            <summary>
+            This column type acts as a numeric adder. For example, if the 
+            value of the column is currently 5 and you 'set' the value to
+            4, the value will become 9.
             </summary>
         </member>
         <member name="T:SimplyCast.ContactManager.ContactManagerAPI">
@@ -1269,6 +843,79 @@
             </summary>
             <param name="connector">The API connection to make requests 
             with.</param>
+        </member>
+        <member name="T:SimplyCast.ContactManager.ContactManagerAPI.ColumnType">
+            <summary>
+            An enum of column data types.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.String">
+            <summary>
+            This column type stores general data (string or numeric).
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.Date">
+            <summary>
+            This column type specifically stores dates/times.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType">
+            <summary>
+            Enum representing the types of metadata columns available.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.SingleString">
+            <summary>
+            This column type holds a single string value.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.SingleNumber">
+            <summary>
+            This column type holds a single numeric value.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.MultiString">
+            <summary>
+            This column type holds multiple string values.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.MultiNumber">
+            <summary>
+            This column type holds multiple numeric values.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.SumNumber">
+            <summary>
+            This column type acts as a numeric adder. For example, if the 
+            value of the column is currently 5 and you 'set' the value to
+            4, the value will become 9.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType">
+            <summary>
+            A suppression list type; each data type is stored in a different 
+            list.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Email">
+            <summary>
+            An email suppression list.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Phone">
+            <summary>
+            A phone number suppression list.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Fax">
+            <summary>
+            A fax number suppression list.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Mobile">
+            <summary>
+            A mobile number suppression list.
+            </summary>
         </member>
         <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetLists">
             <summary>
@@ -1839,191 +1486,544 @@
             <returns>A relay of the added records as suppression entries.
             </returns>
         </member>
-        <member name="T:SimplyCast.ContactManager.ContactManagerAPI.ColumnType">
+        <member name="T:SimplyCast.Examples">
             <summary>
-            An enum of column data types.
+            This class provides example functions that run through the 
+            functionality provided by the C# API wrapper.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.String">
+        <member name="M:SimplyCast.Examples.#ctor(SimplyCast.SimplyCastAPI)">
             <summary>
-            This column type stores general data (string or numeric).
+            Constructor.
+            </summary>
+            <param name="apiHandle"></param>
+        </member>
+        <member name="M:SimplyCast.Examples.ListManagementExample">
+            <summary>
+            List management resource examples.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.Date">
+        <member name="M:SimplyCast.Examples.ContactManagementExample">
             <summary>
-            This column type specifically stores dates/times.
+            Examples of contact management resources. 
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType">
+        <member name="M:SimplyCast.Examples.ContactBatchExample">
             <summary>
-            Enum representing the types of metadata columns available.
+            Example of creating multiple contacts via batch. Also provides an 
+            example of updating existing contacts by merging upon an existing
+            column (this will create a new contact if there are no merge
+            candidates).
+            
+            Note that this is functionality is not backwards-compatible with
+            version 1.1. Because merging upon a column could return one or
+            more contact responses (if multiple merge candidates are found), 
+            ContactBatchResult now contains a ContactCollection object instead
+            of a ContactEntity object. The example is updated to show the new
+            usage.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.SingleString">
+        <member name="M:SimplyCast.Examples.ColumnManagementExample">
             <summary>
-            This column type holds a single string value.
+            Examples of the column management resources.
+            
+            Currently, there aren't many operations that can be done on
+            columns via the API. Columns can only be created and 
+            retrieved. If you have to create many columns, it is 
+            recommended to use metadata columns instead. They're much
+            more flexible and it is possible to do things like 
+            delete them. For example, things like email address should
+            be standard columns, things like tags and lead scoring should
+            be metadata.
+            
+            WARNING: running this example will result in unreversable 
+            changes - the created column cannot be deleted.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.SingleNumber">
+        <member name="M:SimplyCast.Examples.MetadataColumnManagementExample">
             <summary>
-            This column type holds a single numeric value.
+            Metadata column management examples.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.MultiString">
+        <member name="M:SimplyCast.Examples.SimplyCast360Example(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            This column type holds multiple string values.
+            360 Examples. This example requires you to create a test 360 
+            project that contains an inbound and outbound 360 API connection
+            node, and the ID of a contact to test with.
+            
+            NOTE that this will remove things from outbound nodes. Make sure
+            your project you test with is indeed a testing project.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.MultiNumber">
+        <member name="T:SimplyCast.SimplyCast360.Responses.ContactCollection">
             <summary>
-            This column type holds multiple numeric values.
+            This class contains a collection of contact entity representations
+            and fully supports XML serialization.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType.SumNumber">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ContactCollection.Contacts">
             <summary>
-            This column type acts as a numeric adder. For example, if the 
-            value of the column is currently 5 and you 'set' the value to
-            4, the value will become 9.
+            A collection of contact entity representations.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType">
+        <member name="T:SimplyCast.SimplyCast360.Responses.ConnectionEntity">
             <summary>
-            A suppression list type; each data type is stored in a different 
-            list.
+            An API connection endpoint of a 360 project.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Email">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ID">
             <summary>
-            An email suppression list.
+            The unique ID of the connection.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Phone">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Name">
             <summary>
-            A phone number suppression list.
+            The name of the connection.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Fax">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Type">
             <summary>
-            A fax number suppression list.
+            The connection type (inbound connection or outbound connection).
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.SuppressionType.Mobile">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Active">
             <summary>
-            A mobile number suppression list.
+            XML deserialization property. Use IsActive to retrieve the value.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Responses.MetadataFieldEntity">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.IsActive">
             <summary>
-            This class represents a metadata entity representation and supports XML
-            serialization. Metadata entries are a more flexible way of storing 
-            ancillary contact information such as tagging and lead scoring, 
-            especially when not requiring broad queries or when storing conditional
-            data (things that may or may not exist, depending on context).
+            Indicates the status of the connection. Inactive connections 
+            will not do anything.
             </summary>
         </member>
-        <member name="M:SimplyCast.ContactManager.Responses.MetadataFieldEntity.GetSchema">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ConnectionEntity.Links">
             <summary>
-            Unused method of IXmlSerializable.
-            </summary>
-            <returns>null</returns>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Responses.MetadataFieldEntity.ReadXml(System.Xml.XmlReader)">
-            <summary>
-            Deserialized an XML response into an instance of this object.
-            </summary>
-            <param name="reader">An XmlReader object.</param>
-        </member>
-        <member name="M:SimplyCast.ContactManager.Responses.MetadataFieldEntity.WriteXml(System.Xml.XmlWriter)">
-            <summary>
-            This object is never intended to be serialized, so it is not 
-            implemented.
-            </summary>
-            <param name="writer">An XmlWriter.</param>
-        </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.ID">
-            <summary>
-            The ID of metadata column. Can be used to directly access the 
-            metadata column representation.
+            A collection of relation links for the connection.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Name">
+        <member name="T:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ConnectionType">
             <summary>
-            The name of the metadata field.
+            The types of API connection endpoints that are available for 360
+            projects.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Type">
+        <member name="F:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ConnectionType.Inbound">
             <summary>
-            The metadata field type.
+            An inbound connection type.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.IsUserDefined">
+        <member name="F:SimplyCast.SimplyCast360.Responses.ConnectionEntity.ConnectionType.Outbound">
             <summary>
-            A flag indicating if the column is user-defined or if it is a 
-            system column. 
+            An outbound connection.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.IsVisible">
+        <member name="T:SimplyCast.SimplyCast360.Responses.ContactEntity">
             <summary>
-            A flag indicating if the column is visible in the user interface.
+            A representation of a 360 contact entry.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.IsEditable">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.ID">
             <summary>
-            A flag indicating if the column is editable.
+            The 360 handle ID for the contact instance.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Values">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.ContactID">
             <summary>
-            The metadata values.
+            The contact's ID in the contact manager.
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.MetadataFieldEntity.Links">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.ListID">
             <summary>
-            A collection of relation links. Will contain a link to the metadata
-            column resource.
+            The ID of a list that the contact belongs to.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ContactEntity.Links">
             <summary>
-            Enum representing the types of metadata columns available.
+            A collection of relation links for the project.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.SingleString">
+        <member name="T:SimplyCast.SimplyCast360.Responses.ProjectEntity">
             <summary>
-            This column type holds a single string value.
+            This class represents a 360 project.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.SingleNumber">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.ID">
             <summary>
-            This column type holds a single numeric value.
+            The ID of the 360 project.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.MultiString">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Name">
             <summary>
-            This column type holds multiple string values.
+            The name of the 360 project.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.MultiNumber">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Active">
             <summary>
-            This column type holds multiple numeric values.
+            XML serialization property for the active flag. Use IsActive to 
+            check the value.
             </summary>
         </member>
-        <member name="F:SimplyCast.ContactManager.Responses.MetadataFieldEntity.FieldType.SumNumber">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.IsActive">
             <summary>
-            This column type acts as a numeric adder. For example, if the 
-            value of the column is currently 5 and you 'set' the value to
-            4, the value will become 9.
+            Returns the active state of the 360 project.
             </summary>
         </member>
-        <member name="T:SimplyCast.ContactManager.Responses.SuppressionCollection">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Connections">
             <summary>
-            A collection of suppression entries.
+            Return all the API connection endpoints for the requested 360
+            project. 
             </summary>
         </member>
-        <member name="P:SimplyCast.ContactManager.Responses.SuppressionCollection.SuppressionEntries">
+        <member name="P:SimplyCast.SimplyCast360.Responses.ProjectEntity.Links">
             <summary>
-            A collection of suppression entries.
+            A collection of relation links for the project.
             </summary>
+        </member>
+        <member name="T:SimplyCast.SimplyCast360.Requests.ContactEntity">
+            <summary>
+            A contact entity request for pushing to an inbound 360 connection.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.ID">
+            <summary>
+            The ID of the contact.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.List">
+            <summary>
+            The list that contains the contact to push.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.Row">
+            <summary>
+            The contact to push.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.SimplyCast360.Requests.ContactEntity.Links">
+            <summary>
+            A collection of relation links containing at least a 
+            self-reference.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.SimplyCast360.Requests.ListEntity">
+            <summary>
+            A list request entity for pushing to an inbound 360 connection
+            endpoint.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.SimplyCast360.Requests.ListEntity.List">
+            <summary>
+            The list to push to a 360 inbound connection endpoint.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.SimplyCast360.SimplyCast360API">
+            <summary>
+            SimplyCast 360 API class.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.#ctor(SimplyCast.SimplyCastAPIConnector)">
+            <summary>
+            Pass-thru constructor.
+            </summary>
+            <param name="connector">The API connection to make requests 
+            with.</param>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetProject(System.Int32)">
+            <summary>
+            Get a 360 project. The ID of a 360 project can be retrieved from
+            the user interface of the 360 project.
+            </summary>
+            <param name="projectID">The ID of the project to retrieve.</param>
+            <returns>A representation of a 360 project (and the API connections
+            contained within).</returns>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetConnection(System.Int32,SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType,System.Int32)">
+            <summary>
+            Get a connection endpoint by ID. The ID of a connection endpoint
+            can be retrieved from the user interface of the 360 project.
+            </summary>
+            <param name="projectID">The ID of the project containing the 
+            connection.</param>
+            <param name="type">The connection endpoint type.</param>
+            <param name="connectionID">The connection endpoint ID.</param>
+            <returns>A representation of the connection endpoint.</returns>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetOutboundContacts(System.Int32,System.Int32)">
+            <summary>
+            Retrieve a collection of contacts from an outbound connection 
+            endpoint.
+            </summary>
+            <param name="projectID">A 360 project ID.</param>
+            <param name="connectionID">An outbound API connection ID.</param>
+            <returns>A collection of contact representations.</returns>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.GetOutboundContact(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="projectID"></param>
+            <param name="connectionID"></param>
+            <param name="contactID"></param>
+            <returns>A represenation of the contact entry in the outbound 
+            connection node.</returns>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.PushList(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Submit a list to an inbound API connection endpoint.
+            </summary>
+            <param name="projectID">A 360 project ID.</param>
+            <param name="connectionID">A 360 API connection endpoint ID.
+            </param>
+            <param name="listID">The ID of the list to push into the 360
+            project.</param>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.PushContact(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Submit a contact to an inbound API connection endpoint.
+            </summary>
+            <param name="projectID">A 360 project ID.</param>
+            <param name="connectionID">A 360 API connection endpoint ID.
+            </param>
+            <param name="listID">The ID of a list that the contact belongs to.
+            </param>
+            <param name="contactID">The ID of the contact to push into the 
+            360 workflow.</param>
+        </member>
+        <member name="M:SimplyCast.SimplyCast360.SimplyCast360API.DeleteContact(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Delete a contact from an outbound node. This only removes the
+            contact from the outbound processing queue (permanently). 
+            </summary>
+            <param name="projectID">The ID of the project.</param>
+            <param name="connectionID">The ID of the connection.</param>
+            <param name="contactID">The ID of the contact to remove. This must
+            be the 360 contact ID, not the contact manager contact ID.</param>
+        </member>
+        <member name="T:SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType">
+            <summary>
+            The types of API connection endpoints that are available for 360
+            projects.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType.Inbound">
+            <summary>
+            An inbound connection type.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCast360.SimplyCast360API.ConnectionType.Outbound">
+            <summary>
+            An outbound connection.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.APIException.#ctor">
+            <summary>
+            APIExceptions are thrown when a 400 or 500 series error is 
+            encountered in an API call.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.APIException.#ctor(System.String)">
+            <summary>
+            APIExceptions are thrown when a 400 or 500 series error is 
+            encountered in an API call.
+            </summary>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:SimplyCast.APIException.#ctor(System.String,System.Exception)">
+            <summary>
+            APIExceptions are thrown when a 400 or 500 series error is 
+            encountered in an API call.
+            </summary>
+            <param name="message">The error message.</param>
+            <param name="inner">Inner exception.</param>
+        </member>
+        <member name="P:SimplyCast.APIException.StatusCode">
+            <summary>
+            The HTTP status code of the error response.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.APIException.StatusDescription">
+            <summary>
+            The status description of the error response.
+            
+            </summary>
+        </member>
+        <member name="T:SimplyCast.Common.Responses.Error">
+            <summary>
+            Helper class for deserializing XML errors.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.Common.Responses.Error.Message">
+            <summary>
+            The text summary of the error encountered.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.Common.Responses.GenericCollection">
+            <summary>
+            This class is a helper for other collection classes, as they will often
+            share the attributes below.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.Common.Responses.GenericCollection.TotalCount">
+            <summary>
+            Total count represents the total number of entities available on
+            the resource before filtering.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.Common.Responses.GenericCollection.FilterCount">
+            <summary>
+            Filter count represents the total number of entities available on
+            the resource after any filtering queries (excluding offset/limit)
+            are applied.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.Common.Responses.GenericCollection.ResponseCount">
+            <summary>
+            Response count is the number of entities returned in the response, 
+            provided as a convenience.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.Common.Responses.GenericCollection.Links">
+            <summary>
+            A collection of relation links. Used for paging; next and prev 
+            links will contain the appropriate query parameters for retrieving
+            the next and previous pages.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.Common.Responses.RelationLink">
+            <summary>
+            This class represents a relation link. Relation links assist in 
+            navigating through API resources.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.Common.Responses.RelationLink.Rel">
+            <summary>
+            The type of relation (self referencing, next/previous page, etc).
+            </summary>
+        </member>
+        <member name="P:SimplyCast.Common.Responses.RelationLink.URL">
+            <summary>
+            The destination resource of the relation.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ResourceAPI">
+            <summary>
+            This class is the one that all resource collection APIs decend from.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ResourceAPI.connection">
+            <summary>
+            The API connection used to make requests with.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.ResourceAPI.#ctor(SimplyCast.SimplyCastAPIConnector)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="connection">The API connection, provided by 
+            the SimplyCastAPI class.</param>
+        </member>
+        <member name="T:SimplyCast.SimplyCastAPI">
+            <summary>
+            This is the base API class that is used to make all requests to the
+            API. 
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPI.GET">
+            <summary>
+            HTTP GET method constant.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPI.POST">
+            <summary>
+            HTTP POST method constant.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPI.DELETE">
+            <summary>
+            HTTP DELETE method constant.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPI.connection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPI.contactManager">
+            <summary>
+            Contact manager API handle.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPI.simplycast360">
+            <summary>
+            360 API handle.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.SimplyCastAPI.ContactManager">
+            <summary>
+            Contact manager API resource container.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.SimplyCastAPI.SimplyCast360">
+            <summary>
+            360 API resource container.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.SimplyCastAPI.#ctor(System.String,System.String)">
+            <summary>
+            Main API class constructor.
+            </summary>
+            <param name="publicKey">The desired account API public key.</param>
+            <param name="secretKey">The desired account API secret key.</param>
+        </member>
+        <member name="T:SimplyCast.SimplyCastAPIConnector">
+            <summary>
+            SimplyCast REST API connector.
+            See https://app.simplycast.com/?q=api/reference
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPIConnector.publicKey">
+            <summary>
+            The public key, used to identify the user.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPIConnector.secretKey">
+            <summary>
+            The secret key, used in generating signatures.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.SimplyCastAPIConnector.apiURL">
+            <summary>
+            API URL, sans the resource endpoint.
+            </summary>
+        </member>
+        <member name="M:SimplyCast.SimplyCastAPIConnector.#ctor(System.String,System.String)">
+            <summary>
+            API constructor
+            </summary>
+            <param name="publicKey">The public key to make the request with.</param>
+            <param name="secretKey">The secret key to make the request with.</param>
+        </member>
+        <member name="M:SimplyCast.SimplyCastAPIConnector.Call``1(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object)">
+            <summary>
+            Main API calling function.
+            </summary>
+            <typeparam name="T">The entity response return type.</typeparam>
+            <param name="method">The HTTP method (GET, POST, etc).</param>
+            <param name="resource">The API resource (the part of the URL 
+            between the base URL and the query parameters.</param>
+            <param name="queryParameters">A dictionary of request query 
+            parameters.</param>
+            <param name="requestBody">A serializable object containing the
+            rquest body.</param>
+            <returns>A response entity.</returns>
+        </member>
+        <member name="M:SimplyCast.SimplyCastAPIConnector.BytesToHex(System.Byte[])">
+            <summary>
+            Given an array of bytes, convert it to a hex representation.
+            </summary>
+            <param name="bytes">The array of bytes to convert.</param>
+            <returns>A hex string.</returns>
         </member>
     </members>
 </doc>
