@@ -179,7 +179,7 @@ namespace SimplyCast.ContactManager.Responses
             /// <summary>
             /// This column type specifically stores bool.
             /// </summary>
-            [XmlEnum("bool")]
+            [XmlEnum("boolean")]
             Boolean = 4,
 
             /// <summary>

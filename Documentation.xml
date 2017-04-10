@@ -49,6 +49,26 @@
             This column type specifically stores dates/times.
             </summary>
         </member>
+        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.Integer">
+            <summary>
+            This column type specifically stores Integers.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.Number">
+            <summary>
+            This column type specifically stores Number.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.Boolean">
+            <summary>
+            This column type specifically stores bool.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Requests.ColumnEntity.ColumnType.Text">
+            <summary>
+            This column type specifically stores text.
+            </summary>
+        </member>
         <member name="T:SimplyCast.ContactManager.Requests.ContactIDCollection">
             <summary>
             A representation for the 'add contacts to list' API call.
@@ -512,6 +532,26 @@
             This column type specifically stores dates/times.
             </summary>
         </member>
+        <member name="F:SimplyCast.ContactManager.Responses.ColumnEntity.ColumnType.Integer">
+            <summary>
+            This column type specifically stores Integers.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.ColumnEntity.ColumnType.Number">
+            <summary>
+            This column type specifically stores Number.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.ColumnEntity.ColumnType.Boolean">
+            <summary>
+            This column type specifically stores bool.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.Responses.ColumnEntity.ColumnType.Text">
+            <summary>
+            This column type specifically stores text.
+            </summary>
+        </member>
         <member name="T:SimplyCast.ContactManager.Responses.ContactCollection">
             <summary>
             This class contains a collection of contact entity representations
@@ -857,6 +897,26 @@
         <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.Date">
             <summary>
             This column type specifically stores dates/times.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.Integer">
+            <summary>
+            This column type specifically stores Integers.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.Number">
+            <summary>
+            This column type specifically stores Number.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.Boolean">
+            <summary>
+            This column type specifically stores bool.
+            </summary>
+        </member>
+        <member name="F:SimplyCast.ContactManager.ContactManagerAPI.ColumnType.Text">
+            <summary>
+            This column type specifically stores text.
             </summary>
         </member>
         <member name="T:SimplyCast.ContactManager.ContactManagerAPI.MetadataColumnType">
