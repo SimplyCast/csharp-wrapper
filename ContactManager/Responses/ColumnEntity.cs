@@ -186,7 +186,7 @@ namespace SimplyCast.ContactManager.Responses
             /// This column type specifically stores text.
             /// </summary>
             [XmlEnum("text")]
-            Text = 5,
+            Text = 5
         }
     }
 }
