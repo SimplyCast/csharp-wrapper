@@ -54,6 +54,7 @@ namespace SimplyCast
         {
             this.publicKey = publicKey;
             this.secretKey = secretKey;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
         #region Utility Functions
