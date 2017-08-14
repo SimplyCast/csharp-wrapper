@@ -38,7 +38,7 @@ namespace SimplyCast.ContactManager.Responses
 
         /// <summary>
         /// The date and time that the value was added to the unsubscribe
-        /// registry. If thi value is not set or specified in the response,
+        /// registry. If the value is not set or specified in the response,
         /// the default value of this field will be DateTime.MinValue.
         /// </summary>
         [XmlIgnore]
