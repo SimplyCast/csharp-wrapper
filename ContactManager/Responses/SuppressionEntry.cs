@@ -37,7 +37,9 @@ namespace SimplyCast.ContactManager.Responses
         }
 
         /// <summary>
-        /// The date and time that the value was added.
+        /// The date and time that the value was added to the unsubscribe
+        /// registry. If thi value is not set or specified in the response,
+        /// the default value of this field will be DateTime.MinValue.
         /// </summary>
         [XmlIgnore]
         public DateTime Added
@@ -47,8 +49,9 @@ namespace SimplyCast.ContactManager.Responses
         }
 
         /// <summary>
-        /// The date and time that the value hardbounced 
-        /// if the valued is a email is a email.
+        /// The date and time that the value hard bounced, if applicable. If 
+        /// the value is not specified, the default value of this field will 
+        /// be DateTime.MinvValue.
         /// </summary>
         [XmlIgnore]
         public DateTime HardBounced
@@ -58,7 +61,10 @@ namespace SimplyCast.ContactManager.Responses
         }
 
         /// <summary>
-        /// Returns the string repensentation of added
+        /// Returns the string repensentation of the added timestamp. This is 
+        /// primarily intended to be used for deserialization of the XML 
+        /// representation of the object, as it may not contain a valid 
+        /// DateTime value.
         /// </summary> 
         [XmlAttribute("added")]
         public string AddedString
@@ -68,8 +74,11 @@ namespace SimplyCast.ContactManager.Responses
         }
 
         /// <summary>
-        /// Returns the String form of hardBounced.
-        /// </summary>
+        /// Returns the string repensentation of the bounce timestamp. This is 
+        /// primarily intended to be used for deserialization of the XML 
+        /// representation of the object, as it may not contain a valid 
+        /// DateTime value.
+        /// </summary> 
         [XmlAttribute("hardBounced")]
         public string HardBouncedString
         {
