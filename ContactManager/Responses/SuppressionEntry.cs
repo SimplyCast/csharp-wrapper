@@ -22,7 +22,7 @@ namespace SimplyCast.ContactManager.Responses
     {
         private string value;
         private DateTime added;
-        private DateTime hardBounced;
+        private int hardBounced;
         private CultureInfo culture = CultureInfo.InvariantCulture;
 
         /// <summary>
@@ -49,12 +49,11 @@ namespace SimplyCast.ContactManager.Responses
         }
 
         /// <summary>
-        /// The date and time that the value hard bounced, if applicable. If 
-        /// the value is not specified, the default value of this field will 
-        /// be DateTime.MinvValue.
+        /// If the entry is an email address, 1 indicates that the value was
+        /// a hard bounce.
         /// </summary>
-        [XmlIgnore]
-        public DateTime HardBounced
+        [XmlAttribute("hardBounced")]
+        public int HardBounced
         {
             get { return this.hardBounced; }
             set { this.hardBounced = value; }
@@ -71,19 +70,6 @@ namespace SimplyCast.ContactManager.Responses
         {
             get { return this.added.ToString("yyyy-MM-dd'T'HH:mm:sszzz", culture); }
             set { this.added = convertString(value); }
-        }
-
-        /// <summary>
-        /// Returns the string repensentation of the bounce timestamp. This is 
-        /// primarily intended to be used for deserialization of the XML 
-        /// representation of the object, as it may not contain a valid 
-        /// DateTime value.
-        /// </summary> 
-        [XmlAttribute("hardBounced")]
-        public string HardBouncedString
-        {
-            get { return this.hardBounced.ToString("yyyy-MM-dd'T'HH:mm:sszzz", culture); }
-            set { this.hardBounced = convertString(value); }
         }
 
         private DateTime convertString(string dateString)
