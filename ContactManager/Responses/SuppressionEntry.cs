@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace SimplyCast.ContactManager.Responses
 {
@@ -21,7 +22,8 @@ namespace SimplyCast.ContactManager.Responses
     {
         private string value;
         private DateTime added;
-        private int hardBounced;
+        private DateTime hardBounced;
+        private CultureInfo culture = CultureInfo.InvariantCulture;
 
         /// <summary>
         /// The suppressed contact value for the entry (an email address, phone
@@ -37,7 +39,7 @@ namespace SimplyCast.ContactManager.Responses
         /// <summary>
         /// The date and time that the value was added.
         /// </summary>
-        [XmlAttribute("added")]
+        [XmlIgnore]
         public DateTime Added
         {
             get { return this.added; }
@@ -45,14 +47,47 @@ namespace SimplyCast.ContactManager.Responses
         }
 
         /// <summary>
-        /// If the entry is an email address, 1 indicates that the value was
-        /// a hard bounce.
+        /// The date and time that the value hardbounced 
+        /// if the valued is a email is a email.
         /// </summary>
-        [XmlAttribute("hardBounced")]
-        public int HardBounced
+        [XmlIgnore]
+        public DateTime HardBounced
         {
             get { return this.hardBounced; }
             set { this.hardBounced = value; }
+        }
+
+        /// <summary>
+        /// Returns the string repensentation of added
+        /// </summary> 
+        [XmlAttribute("added")]
+        public string AddedString
+        {
+            get { return this.added.ToString("yyyy-MM-dd'T'HH:mm:sszzz", culture); }
+            set { this.added = convertString(value); }
+        }
+
+        /// <summary>
+        /// Returns the String form of hardBounced.
+        /// </summary>
+        [XmlAttribute("hardBounced")]
+        public string HardBouncedString
+        {
+            get { return this.hardBounced.ToString("yyyy-MM-dd'T'HH:mm:sszzz", culture); }
+            set { this.hardBounced = convertString(value); }
+        }
+
+        private DateTime convertString(string dateString)
+        {
+            DateTime result;
+            if (DateTime.TryParseExact(dateString, "yyyy-MM-dd'T'HH:mm:sszzz", culture, DateTimeStyles.None, out result)) {
+                return result;
+            }
+            else
+            {
+                return DateTime.MinValue;
+            }
+
         }
     }
 }
