@@ -54,6 +54,7 @@ namespace SimplyCast
         {
             this.publicKey = publicKey;
             this.secretKey = secretKey;
+            ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
