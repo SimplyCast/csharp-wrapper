@@ -1137,5 +1137,186 @@ namespace SimplyCast.ContactManager
         }
 
         #endregion
+
+        #region Note Resources
+
+        /// <summary>
+        /// Get all notes on an account, regardless of contact.
+        /// <returns>A collection of notes, up to the first 100.</returns>
+        public Responses.NoteCollection GetAllNotes()
+        {
+            return this.GetAllNotes(0, 100);
+        }
+
+        /// <summary>
+        /// Get all notes on an account, regardless of contact.
+        /// </summary>
+        /// <param name="offset">The zero-based offset to start the page at.
+        /// </param>
+        /// <param name="limit">The number of entries to retrieve past the 
+        /// offset.</param>
+        /// <returns>A collection of CRM notes.</returns>
+        public Responses.NoteCollection GetAllNotes(int offset, int limit)
+        {
+            return this.GetAllNotes(offset, limit, null);
+        }
+
+        /// <summary>
+        /// Get all notes on an account, regardless of contact.
+        /// </summary>
+        /// <param name="offset">The zero-based offset to start the page at.
+        /// </param>
+        /// <param name="limit">The number of entries to retrieve past the 
+        /// offset.</param>
+        /// <param name="query">A query to filter / search for notes. 
+        /// See the API documentation for the query format and 
+        /// queryable fields.</param>
+        /// <returns>A collection of CRM notes.</returns>
+        public Responses.NoteCollection GetAllNotes(int offset, int limit, string query)
+        {
+            Dictionary<string, string> queryParameters = new Dictionary<string, string>();
+            queryParameters.Add("offset", offset.ToString());
+            queryParameters.Add("limit", limit.ToString());
+
+            if (query != null && query.Length > 0)
+            {
+                queryParameters.Add("query", query);
+            }
+
+            return this.connection.Call<Responses.NoteCollection>("GET", "contactmanager/notes", queryParameters, null);
+        }
+
+        /// <summary>
+        /// Get notes by contact.
+        /// </summary>
+        /// <param name="contactId">The ID of the contact to get notes from.
+        /// </param>
+        /// <returns>A collection of CRM notes.</returns>
+        public Responses.NoteCollection GetNotesByContact(int contactId)
+        {
+            return this.GetNotesByContact(contactId, 0, 100);
+        }
+
+        /// <summary>
+        /// Get notes by contact.
+        /// </summary>
+        /// <param name="contactId">The ID of the contact to get notes from.
+        /// </param>
+        /// <param name="offset">The zero-based offset to start the page at.
+        /// </param>
+        /// <param name="limit">The number of entries to retrieve past the 
+        /// offset.</param>
+        /// <returns>A collection of CRM notes.</returns>
+        public Responses.NoteCollection GetNotesByContact(int contactId, int offset, int limit)
+        {
+            return this.GetNotesByContact(contactId, 0, 100, null);
+        }
+
+        /// <summary>
+        /// Get notes by contact.
+        /// </summary>
+        /// <param name="contactId">The ID of the contact to get notes from.
+        /// </param>
+        /// <param name="offset">The zero-based offset to start the page at.
+        /// </param>
+        /// <param name="limit">The number of entries to retrieve past the 
+        /// offset.</param>
+        /// <param name="query">A query to filter / search for notes. 
+        /// See the API documentation for the query format and 
+        /// queryable fields.</param>
+        /// <returns>A collection of CRM notes.</returns>
+        public Responses.NoteCollection GetNotesByContact(int contactId, int offset, int limit, string query)
+        {
+            Dictionary<string, string> queryParameters = new Dictionary<string, string>();
+            queryParameters.Add("offset", offset.ToString());
+            queryParameters.Add("limit", limit.ToString());
+
+            if (query != null && query.Length > 0)
+            {
+                queryParameters.Add("query", query);
+            }
+
+            return this.connection.Call<Responses.NoteCollection>("GET", "contactmanager/contacts/" + contactId + "/notes", queryParameters, null);
+        }
+
+        /// <summary>
+        /// Get a note by contact ID and note ID.
+        /// </summary>
+        /// <param name="contactId">The ID of the contact to retrieve a note 
+        /// from.</param>
+        /// <param name="noteId">The ID of the note to retrieve.</param>
+        /// <returns>A NoteEntity object with the note.</returns>
+        public Responses.NoteEntity GetNote(int contactId, int noteId)
+        {
+            return this.connection.Call<Responses.NoteEntity>("GET", "contactmanager/contacts/" + contactId + "/notes/" + noteId, null, null);
+        }
+
+        /// <summary>
+        /// Create a note in the CRM, and attach it to a contact.
+        /// </summary>
+        /// <param name="contactId">The ID of the contact entry to create the 
+        /// note on.</param>
+        /// <param name="title">The title to set on the note.</param>
+        /// <param name="description">The content/description of the note.
+        /// </param>
+        /// <returns>A NoteEntity object with the note's content.</returns>
+        public Responses.NoteEntity CreateNote(int contactId, string title, string description)
+        {
+            Requests.NoteEntity note = new Requests.NoteEntity();
+            note.Title = title;
+            note.Description = description;
+
+            return this.connection.Call<Responses.NoteEntity>("POST", "contactmanager/contacts/" + contactId + "/notes", null, note);
+        }
+
+        /// <summary>
+        /// Update the given note with a new title and/or description. If you'd
+        /// like to clear the value for the title or description, provide an 
+        /// empty string. Pass null to leave the value unchanged.
+        /// </summary>
+        /// <param name="contactId">The ID of the contact that the note is 
+        /// attached to.</param>
+        /// <param name="noteId">The ID of the note to update.</param>
+        /// <param name="title">A new title to add to the note.</param>
+        /// <param name="description">A new description for the note.</param>
+        /// <returns>A NoteEntity object with the updated content.</returns>
+        public Responses.NoteEntity UpdateNote(int contactId, int noteId, string title = null, string description = null)
+        {
+            Requests.NoteEntity note = new Requests.NoteEntity();
+            bool update = false;
+
+            if (title != null)
+            {
+                note.Title = title;
+                update = true;
+            }
+
+            if (description != null)
+            {
+                note.Description = description;
+                update = true;
+            }
+
+            if (update)
+            {
+                return this.connection.Call<Responses.NoteEntity>("POST", "contactmanager/contacts/" + contactId + "/notes/" + noteId, null, note);
+            }
+            else
+            {
+                return this.connection.Call<Responses.NoteEntity>("GET", "contactmanager/contacts/" + contactId + "/notes/" + noteId, null, null);
+            }
+        }
+
+        /// <summary>
+        /// Delete the given note.
+        /// </summary>
+        /// <param name="contactId">The ID of the content that owns the note.</param>
+        /// <param name="noteId">The ID of the note to delete.</param>
+        public void DeleteNote(int contactId, int noteId)
+        {
+            this.connection.Call<object>("DELETE", "contactmanager/contacts/" + contactId + "/notes/" + noteId, null, null);
+        }
+
+        #endregion
     }
 }

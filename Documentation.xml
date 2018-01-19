@@ -14,6 +14,21 @@
             An array of contact entries to create.
             </summary>
         </member>
+        <member name="T:SimplyCast.ContactManager.Requests.NoteEntity">
+            <summary>
+            An XML request entity.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Requests.NoteEntity.Title">
+            <summary>
+            The title of the CRM note.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Requests.NoteEntity.Description">
+            <summary>
+            The description attached to the note.
+            </summary>
+        </member>
         <member name="T:SimplyCast.ContactManager.Requests.ColumnEntity">
             <summary>
             A column request entity representation.
@@ -281,6 +296,59 @@
             An array of contact batch result objects.
             </summary>
         </member>
+        <member name="T:SimplyCast.ContactManager.Responses.NoteCollection">
+            <summary>
+            This class contains a collection of CRM note entities and fully 
+            supports XML serialization.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteCollection.Notes">
+            <summary>
+            An collection of CRM note entities.
+            </summary>
+        </member>
+        <member name="T:SimplyCast.ContactManager.Responses.NoteEntity">
+            <summary>
+            This class contains a CRM note entity representation and fully 
+            supports XML serialization.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteEntity.ID">
+            <summary>
+            The ID of the note; can be used to directly access the 
+            note resource.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteEntity.ContactID">
+            <summary>
+            The ID of the contact the note belongs to.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteEntity.Created">
+            <summary>
+            The date and time that the note was created.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteEntity.Modified">
+            <summary>
+            The date and time of the last modification.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteEntity.Title">
+            <summary>
+            The title of the note.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteEntity.Description">
+            <summary>
+            The name of the note.
+            </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.NoteEntity.Links">
+            <summary>
+            A collection of relation links. Will contain a link to the note resource.
+            </summary>
+        </member>
         <member name="T:SimplyCast.ContactManager.Responses.SuppressionCollection">
             <summary>
             A collection of suppression entries.
@@ -304,7 +372,9 @@
         </member>
         <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.Added">
             <summary>
-            The date and time that the value was added.
+            The date and time that the value was added to the unsubscribe
+            registry. If the value is not set or specified in the response,
+            the default value of this field will be DateTime.MinValue.
             </summary>
         </member>
         <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.HardBounced">
@@ -312,6 +382,14 @@
             If the entry is an email address, 1 indicates that the value was
             a hard bounce.
             </summary>
+        </member>
+        <member name="P:SimplyCast.ContactManager.Responses.SuppressionEntry.AddedString">
+            <summary>
+            Returns the string repensentation of the added timestamp. This is 
+            primarily intended to be used for deserialization of the XML 
+            representation of the object, as it may not contain a valid 
+            DateTime value.
+            </summary> 
         </member>
         <member name="T:SimplyCast.ContactManager.Responses.MetadataFieldCollection">
             <summary>
@@ -1545,6 +1623,105 @@
             numbers, etc).</param>
             <returns>A relay of the added records as suppression entries.
             </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SimplyCast.ContactManager.ContactManagerAPI.GetAllNotes" -->
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetAllNotes(System.Int32,System.Int32)">
+            <summary>
+            Get all notes on an account, regardless of contact.
+            </summary>
+            <param name="offset">The zero-based offset to start the page at.
+            </param>
+            <param name="limit">The number of entries to retrieve past the 
+            offset.</param>
+            <returns>A collection of CRM notes.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetAllNotes(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all notes on an account, regardless of contact.
+            </summary>
+            <param name="offset">The zero-based offset to start the page at.
+            </param>
+            <param name="limit">The number of entries to retrieve past the 
+            offset.</param>
+            <param name="query">A query to filter / search for notes. 
+            See the API documentation for the query format and 
+            queryable fields.</param>
+            <returns>A collection of CRM notes.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetNotesByContact(System.Int32)">
+            <summary>
+            Get notes by contact.
+            </summary>
+            <param name="contactId">The ID of the contact to get notes from.
+            </param>
+            <returns>A collection of CRM notes.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetNotesByContact(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get notes by contact.
+            </summary>
+            <param name="contactId">The ID of the contact to get notes from.
+            </param>
+            <param name="offset">The zero-based offset to start the page at.
+            </param>
+            <param name="limit">The number of entries to retrieve past the 
+            offset.</param>
+            <returns>A collection of CRM notes.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetNotesByContact(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Get notes by contact.
+            </summary>
+            <param name="contactId">The ID of the contact to get notes from.
+            </param>
+            <param name="offset">The zero-based offset to start the page at.
+            </param>
+            <param name="limit">The number of entries to retrieve past the 
+            offset.</param>
+            <param name="query">A query to filter / search for notes. 
+            See the API documentation for the query format and 
+            queryable fields.</param>
+            <returns>A collection of CRM notes.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.GetNote(System.Int32,System.Int32)">
+            <summary>
+            Get a note by contact ID and note ID.
+            </summary>
+            <param name="contactId">The ID of the contact to retrieve a note 
+            from.</param>
+            <param name="noteId">The ID of the note to retrieve.</param>
+            <returns>A NoteEntity object with the note.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.CreateNote(System.Int32,System.String,System.String)">
+            <summary>
+            Create a note in the CRM, and attach it to a contact.
+            </summary>
+            <param name="contactId">The ID of the contact entry to create the 
+            note on.</param>
+            <param name="title">The title to set on the note.</param>
+            <param name="description">The content/description of the note.
+            </param>
+            <returns>A NoteEntity object with the note's content.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.UpdateNote(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Update the given note with a new title and/or description. If you'd
+            like to clear the value for the title or description, provide an 
+            empty string. Pass null to leave the value unchanged.
+            </summary>
+            <param name="contactId">The ID of the contact that the note is 
+            attached to.</param>
+            <param name="noteId">The ID of the note to update.</param>
+            <param name="title">A new title to add to the note.</param>
+            <param name="description">A new description for the note.</param>
+            <returns>A NoteEntity object with the updated content.</returns>
+        </member>
+        <member name="M:SimplyCast.ContactManager.ContactManagerAPI.DeleteNote(System.Int32,System.Int32)">
+            <summary>
+            Delete the given note.
+            </summary>
+            <param name="contactId">The ID of the content that owns the note.</param>
+            <param name="noteId">The ID of the note to delete.</param>
         </member>
         <member name="T:SimplyCast.Examples">
             <summary>
